@@ -150,7 +150,7 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <p className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-                  Business Process Automation, Client Operations & Digital Solutions Strategy.
+                  Leading AI System Architecture, Business Process Automation, Client Operations & Digital Solutions Strategy.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-5 font-mono text-xs text-slate-700">
                   <a href="tel:+919712945544" className="flex items-center gap-2 hover:text-teal-600 transition-colors">

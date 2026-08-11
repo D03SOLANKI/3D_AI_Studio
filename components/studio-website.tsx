@@ -906,8 +906,6 @@ function Footer() {
             <div className="space-y-4">
               <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-slate-500">Direct Contact</h4>
               <ul className="space-y-2 font-mono text-xs text-slate-600">
-                <li>DEV SOLANKI: +91 9313220796</li>
-                <li>HET VEKARIYA: +91 9712945544</li>
                 <li><a href="mailto:automatevision06@gmail.com" className="text-blue-600 hover:underline">automatevision06@gmail.com</a></li>
               </ul>
             </div>
