@@ -89,11 +89,33 @@ function Navigation() {
 function Hero() {
   return (
     <section id="top" className="relative flex min-h-screen items-center overflow-hidden border-b border-white/[0.06] pt-20">
-      <div className="absolute inset-0 grid-bg opacity-60" />
-      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.06] blur-[100px]" />
-      <div className="absolute inset-0 opacity-70">
+      {/* Background Video Layer inspired by Tarkshy */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-full object-cover opacity-45 mix-blend-screen"
+        >
+          <source src="https://cdn.pixabay.com/video/2023/07/27/173485-849645876_large.mp4" type="video/mp4" />
+        </video>
+
+        {/* Gradient Overlay for Sleek Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-[#050505]/40 to-[#050505]/95 z-10" />
+
+        {/* Sci-Fi Beam Lines */}
+        <div className="absolute top-1/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent animate-pulse z-10" />
+        <div className="absolute top-2/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent z-10" />
+      </div>
+
+      <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
+      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.06] blur-[100px] pointer-events-none" />
+      
+      <div className="absolute inset-0 opacity-50 pointer-events-none z-0">
         <StudioCanvas />
       </div>
+
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 sm:px-8">
         <div className="max-w-2xl">
           <div className="mb-7 flex items-center gap-3 font-mono text-[10px] tracking-[0.24em] text-accent">
@@ -127,8 +149,36 @@ function Hero() {
           SCROLL TO EXPLORE AUTOMATE VISION
         </div>
       </div>
-      <div className="absolute bottom-0 right-5 hidden font-mono text-[9px] tracking-[0.2em] text-zinc-700 sm:right-8 sm:block">
+      <div className="absolute bottom-0 right-5 hidden font-mono text-[9px] tracking-[0.2em] text-zinc-700 sm:right-8 sm:block z-10">
         SYS.INIT
+      </div>
+    </section>
+  );
+}
+
+function Marquee() {
+  const items = [
+    'AI AGENTS',
+    'AI RECEPTIONISTS',
+    'AI CHATBOTS',
+    'WEBSITES + AI',
+    'BUSINESS AUTOMATION',
+    'WHATSAPP AUTOMATION',
+    'VOICE AI AGENTS',
+    'RAG ENGINE PIPELINES',
+    'NEXT.JS 14+ WEBSITES',
+    'PYTHON AI SYSTEMS',
+  ];
+
+  return (
+    <section className="relative overflow-hidden border-b border-white/[0.06] bg-[#040404] py-8">
+      <div className="flex w-max animate-marquee gap-8 whitespace-nowrap">
+        {[...items, ...items, ...items].map((item, index) => (
+          <div key={index} className="flex items-center gap-8 font-mono text-xs tracking-[0.24em] text-zinc-400">
+            <span className="text-cyan-400">•</span>
+            <span className="hover:text-white transition-colors cursor-default">{item}</span>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -288,5 +338,5 @@ function Footer() {
 
 export function StudioWebsite() {
   useEffect(() => { track('qr_landing'); }, []);
-  return <div className="noise-bg min-h-screen bg-[#050505]"><Navigation /><main><Hero /><Capabilities /><Work /><SystemMap /><Services /><Process /><Technology /><WhyUs /><About /><Contact /></main><Footer /></div>;
+  return <div className="noise-bg min-h-screen bg-[#050505]"><Navigation /><main><Hero /><Marquee /><Capabilities /><Work /><SystemMap /><Services /><Process /><Technology /><WhyUs /><About /><Contact /></main><Footer /></div>;
 }
