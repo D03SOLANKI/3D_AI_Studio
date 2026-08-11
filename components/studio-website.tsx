@@ -122,18 +122,20 @@ function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 sm:px-8">
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
           <div className="mb-7 flex items-center gap-3 font-mono text-[10px] tracking-[0.24em] text-accent">
             <span className="h-px w-8 bg-accent" />
-            AUTOMATE VISION // AI AUTOMATION & DIGITAL SOLUTIONS
+            AUTOMATE VISION // CONSULTANCY & DIGITAL SOLUTIONS
           </div>
-          <h1 className="max-w-xl text-5xl font-bold leading-[0.94] tracking-[-0.05em] text-white sm:text-7xl lg:text-[6.5rem]">
-            AI SYSTEMS <br />
-            <span className="text-gradient-accent">THAT WORK FOR YOU</span>
-            <span className="text-accent">.</span>
+          <h1 className="max-w-3xl text-5xl font-medium tracking-tighter leading-[0.92] text-white sm:text-7xl lg:text-[6.5rem]">
+            Architecting <br />
+            <span className="text-white/90">Intelligent</span>{' '}
+            <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-200 to-cyan-400">
+              Ecosystems.
+            </span>
           </h1>
-          <p className="mt-8 max-w-md text-base leading-7 text-zinc-400 sm:text-lg">
-            AI Agents, Voice AI Receptionists, AI Chatbots, Websites + AI, Business Automation, and WhatsApp Automation engineered to scale your operations.
+          <p className="mt-8 max-w-xl text-base leading-7 text-zinc-400 sm:text-lg">
+            We build premium digital ecosystems—from advanced <strong className="text-white font-normal">AI &amp; ML agents</strong> to enterprise <strong className="text-white font-normal">Web Platforms</strong> and <strong className="text-white font-normal">WhatsApp Automations</strong>—delivering sophisticated user experiences.
           </p>
           <p className="mt-6 font-mono text-[9px] tracking-[0.18em] text-zinc-500">
             AUTOMATE <span className="text-accent">•</span> INNOVATE <span className="text-accent">•</span> ELEVATE
@@ -142,8 +144,8 @@ function Hero() {
             <ButtonLink href="#work" onClick={() => track('cta_click', { location: 'hero_work' })}>
               EXPLORE OUR WORK
             </ButtonLink>
-            <ButtonLink href="mailto:automatevision06@gmail.com" outline onClick={() => track('cta_click', { location: 'hero_contact' })}>
-              LET&apos;S BUILD
+            <ButtonLink href="/contact" outline onClick={() => track('cta_click', { location: 'hero_contact' })}>
+              START PROJECT
             </ButtonLink>
           </div>
         </div>
@@ -164,26 +166,81 @@ function Hero() {
 function Marquee() {
   const items = [
     'AI AGENTS',
-    'AI RECEPTIONISTS',
+    'VOICE AI RECEPTIONISTS',
     'AI CHATBOTS',
     'WEBSITES + AI',
     'BUSINESS AUTOMATION',
     'WHATSAPP AUTOMATION',
-    'VOICE AI AGENTS',
     'RAG ENGINE PIPELINES',
-    'NEXT.JS 14+ WEBSITES',
+    'NEXT.JS 14+ PORTALS',
     'PYTHON AI SYSTEMS',
+    'WEBGL & 3D INTERACTION',
   ];
 
   return (
-    <section className="relative overflow-hidden border-b border-white/[0.06] bg-[#040404] py-8">
+    <section className="relative overflow-hidden border-b border-t border-white/5 bg-[#030303] py-10">
+      <div className="mx-auto mb-6 text-center font-mono text-[10px] tracking-[0.3em] text-zinc-500 uppercase">
+        AUTOMATE VISION CAPABILITIES
+      </div>
       <div className="flex w-max animate-marquee gap-8 whitespace-nowrap">
-        {[...items, ...items, ...items].map((item, index) => (
-          <div key={index} className="flex items-center gap-8 font-mono text-xs tracking-[0.24em] text-zinc-400">
+        {[...items, ...items, ...items, ...items].map((item, index) => (
+          <div key={index} className="flex items-center gap-8 font-mono text-sm tracking-[0.2em] text-zinc-300 transition-colors hover:text-white cursor-default">
             <span className="text-cyan-400">•</span>
-            <span className="hover:text-white transition-colors cursor-default">{item}</span>
+            <span>{item}</span>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function TheVision() {
+  const steps = [
+    {
+      number: '01',
+      title: 'Research & Strategy',
+      description: 'Deep strategic analysis of your business workflows before a single line of code is written.',
+    },
+    {
+      number: '02',
+      title: 'Architecture & Engineering',
+      description: 'Scalable, resilient architecture across AI Agents, Voice AI, Web Platforms, and Cloud APIs.',
+    },
+    {
+      number: '03',
+      title: 'Execution & Deployment',
+      description: 'Delivering production-ready AI systems, continuous automation pipelines, and high-converting platforms.',
+    },
+  ];
+
+  return (
+    <section className="relative overflow-hidden bg-white py-24 text-black sm:py-36">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="mb-8 font-mono text-[10px] tracking-[0.24em] text-zinc-500 uppercase">
+          THE VISION
+        </div>
+        <h2 className="max-w-4xl text-4xl font-medium tracking-tight leading-[1.08] sm:text-6xl lg:text-7xl">
+          We don&apos;t just build websites. <br />
+          <span className="text-zinc-600">
+            We research, architect, and engineer premium digital ecosystems.
+          </span>
+        </h2>
+
+        <div className="mt-20 grid gap-10 border-t border-black/15 pt-12 sm:grid-cols-3">
+          {steps.map((step) => (
+            <div key={step.number} className="flex flex-col gap-4">
+              <span className="font-light text-4xl sm:text-5xl text-zinc-400 font-mono">
+                {step.number}
+              </span>
+              <h3 className="text-xl font-medium tracking-tight text-black">
+                {step.title}
+              </h3>
+              <p className="text-sm leading-6 text-zinc-600">
+                {step.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -343,5 +400,5 @@ function Footer() {
 
 export function StudioWebsite() {
   useEffect(() => { track('qr_landing'); }, []);
-  return <div className="noise-bg min-h-screen bg-[#050505]"><Navigation /><main><Hero /><Marquee /><Capabilities /><Work /><SystemMap /><Services /><Process /><Technology /><WhyUs /><About /><Contact /></main><Footer /></div>;
+  return <div className="noise-bg min-h-screen bg-[#050505]"><Navigation /><main><Hero /><Marquee /><TheVision /><Capabilities /><Work /><SystemMap /><Services /><Process /><Technology /><WhyUs /><About /><Contact /></main><Footer /></div>;
 }
