@@ -48,14 +48,9 @@ export default function ContactPage() {
         <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-5 sm:px-8">
           <Link href="/" className="flex items-center gap-3.5 group outline-none">
             <AutomateVisionLogo className="h-9 w-9 shrink-0 drop-shadow-[0_2px_10px_rgba(37,99,235,0.3)] group-hover:scale-105 transition-transform duration-500" />
-            <div className="flex flex-col">
-              <span className="font-mono text-xs font-extrabold tracking-[0.24em] text-slate-900">
-                AUTOMATE<span className="text-blue-600"> VISION</span>
-              </span>
-              <span className="font-mono text-[8px] tracking-[0.16em] text-slate-500">
-                CONSULTANCY & DIGITAL SOLUTIONS
-              </span>
-            </div>
+            <span className="font-mono text-sm sm:text-base font-extrabold tracking-[0.24em] text-slate-900">
+              AUTOMATE<span className="text-blue-600"> VISION</span>
+            </span>
           </Link>
 
           <Link

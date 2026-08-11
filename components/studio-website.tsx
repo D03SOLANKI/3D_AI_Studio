@@ -67,12 +67,9 @@ function Logo() {
   return (
     <a href="#top" className="flex items-center gap-3.5 group outline-none" aria-label="AUTOMATE VISION home">
       <AutomateVisionLogo className="h-9 w-9 shrink-0 drop-shadow-[0_2px_10px_rgba(37,99,235,0.3)] group-hover:scale-105 transition-transform duration-500" />
-      <div className="flex flex-col">
-        <span className="font-mono text-xs font-extrabold tracking-[0.24em] text-slate-900">
-          AUTOMATE<span className="text-blue-600"> VISION</span>
-        </span>
-        <span className="font-mono text-[8px] tracking-[0.16em] text-slate-500">CONSULTANCY & DIGITAL SOLUTIONS</span>
-      </div>
+      <span className="font-mono text-sm sm:text-base font-extrabold tracking-[0.24em] text-slate-900">
+        AUTOMATE<span className="text-blue-600"> VISION</span>
+      </span>
     </a>
   );
 }
@@ -241,18 +238,18 @@ function TheVision() {
   const steps = [
     {
       number: '01',
-      title: 'Research & Strategy',
-      description: 'Deep strategic analysis of your business workflows before a single line of code is ever written.',
+      title: 'Workflow Intelligence',
+      description: 'Deep strategic audit to pinpoint high-ROI operational bottlenecks and AI automation targets.',
     },
     {
       number: '02',
-      title: 'Architecture & Engineering',
-      description: 'Scalable, resilient engineering across Web, Voice AI, LLMs, and Cloud Infrastructure.',
+      title: 'Autonomous Architecture',
+      description: 'Designing custom LLM reasoning engines, Voice AI agents, Web portals, and n8n API pipelines.',
     },
     {
       number: '03',
-      title: 'Execution & Deployment',
-      description: 'Delivering premium, high-performance digital systems and automated operational pipelines.',
+      title: 'Production Deployment',
+      description: 'Engineering resilient, scalable AI agents and automated workflows built for continuous operations.',
     },
   ];
 
@@ -265,7 +262,7 @@ function TheVision() {
         <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1] text-white">
           We don&apos;t just build. <br />
           <span className="text-slate-400 font-light">
-            We research, architect, and engineer premium digital solutions.
+            We research, architect, and deploy autonomous AI systems &amp; intelligent automations.
           </span>
         </h2>
 
