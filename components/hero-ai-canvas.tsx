@@ -23,15 +23,16 @@ export function HeroAiCanvas() {
 
     window.addEventListener('resize', handleResize);
 
-    // Particle nodes for high-tech neural mesh
-    const numParticles = Math.min(Math.floor(width / 15), 90);
-    const particles = Array.from({ length: numParticles }, () => ({
+    // Particle nodes for high-tech Cyber Emerald & Quantum Violet neural mesh
+    const numParticles = Math.min(Math.floor(width / 14), 95);
+    const particles = Array.from({ length: numParticles }, (_, i) => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: (Math.random() - 0.5) * 0.6,
-      radius: Math.random() * 2 + 1,
-      alpha: Math.random() * 0.6 + 0.3,
+      vx: (Math.random() - 0.5) * 0.65,
+      vy: (Math.random() - 0.5) * 0.65,
+      radius: Math.random() * 2.2 + 1,
+      alpha: Math.random() * 0.6 + 0.35,
+      color: i % 2 === 0 ? '#00ffb3' : '#a855f7',
     }));
 
     let step = 0;
@@ -41,7 +42,7 @@ export function HeroAiCanvas() {
       ctx.clearRect(0, 0, width, height);
 
       // Draw subtle glowing grid
-      ctx.strokeStyle = 'rgba(0, 217, 255, 0.04)';
+      ctx.strokeStyle = 'rgba(0, 255, 179, 0.03)';
       ctx.lineWidth = 1;
       const gridSize = 60;
 
@@ -58,10 +59,10 @@ export function HeroAiCanvas() {
         ctx.stroke();
       }
 
-      // Draw sine wave energy beams
+      // Draw Emerald energy wave beam
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(0, 217, 255, 0.12)';
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(0, 255, 179, 0.16)';
+      ctx.lineWidth = 1.8;
       for (let x = 0; x < width; x += 5) {
         const y = height * 0.5 + Math.sin(x * 0.005 + step) * 80 + Math.cos(x * 0.008 - step) * 40;
         if (x === 0) ctx.moveTo(x, y);
@@ -69,9 +70,10 @@ export function HeroAiCanvas() {
       }
       ctx.stroke();
 
+      // Draw Quantum Violet energy wave beam
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(0, 102, 255, 0.15)';
-      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(168, 85, 247, 0.18)';
+      ctx.lineWidth = 1.5;
       for (let x = 0; x < width; x += 5) {
         const y = height * 0.45 + Math.cos(x * 0.006 - step * 1.2) * 90;
         if (x === 0) ctx.moveTo(x, y);
@@ -99,7 +101,8 @@ export function HeroAiCanvas() {
 
           if (dist < 140) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 217, 255, ${0.25 * (1 - dist / 140)})`;
+            const strokeColor = i % 2 === 0 ? `rgba(0, 255, 179, ${0.25 * (1 - dist / 140)})` : `rgba(168, 85, 247, ${0.25 * (1 - dist / 140)})`;
+            ctx.strokeStyle = strokeColor;
             ctx.lineWidth = 0.8;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
@@ -110,9 +113,9 @@ export function HeroAiCanvas() {
         // Draw particle node
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 217, 255, ${p.alpha})`;
+        ctx.fillStyle = p.color;
         ctx.shadowBlur = 12;
-        ctx.shadowColor = '#00d9ff';
+        ctx.shadowColor = p.color;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
