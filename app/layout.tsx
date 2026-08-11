@@ -15,36 +15,38 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
-const STUDIO_NAME = 'DevSolanki Studio';
+const STUDIO_NAME = 'AUTOMATE VISION';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://example.com'),
-  title: `AI Engineering & Automation Studio | ${STUDIO_NAME}`,
+  metadataBase: new URL('https://www.automatevision.com'),
+  title: `${STUDIO_NAME} | AI Automation & Digital Solutions`,
   description:
-    'We build AI agents, voice AI, business automation, custom software and intelligent data systems engineered to solve real business problems.',
+    'AUTOMATE VISION architects AI systems that work for you — AI Agents, Voice AI Receptionists, WhatsApp & Social Automation, AI Chatbots, Websites + AI, and Business Automation.',
   keywords: [
-    'AI engineering',
-    'automation studio',
+    'AUTOMATE VISION',
+    'AI automation',
+    'digital solutions',
     'AI agents',
-    'voice AI',
+    'AI receptionists',
+    'AI chatbots',
+    'websites AI',
+    'WhatsApp automation',
     'business automation',
-    'custom software',
-    'RAG systems',
-    'data scraping',
-    'SaaS development',
+    'Dev Solanki',
+    'Het Vekariya',
   ],
   openGraph: {
     type: 'website',
-    title: `AI Engineering & Automation Studio | ${STUDIO_NAME}`,
+    title: `${STUDIO_NAME} | AI Automation & Digital Solutions`,
     description:
-      'We build AI agents, voice AI, business automation, custom software and intelligent data systems.',
+      'AI Systems That Work For You — AI Agents, Voice AI Receptionists, WhatsApp Automation, Websites + AI, and Business Automation.',
     siteName: STUDIO_NAME,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `AI Engineering & Automation Studio | ${STUDIO_NAME}`,
+    title: `${STUDIO_NAME} | AI Automation & Digital Solutions`,
     description:
-      'We build AI agents, voice AI, business automation, custom software and intelligent data systems.',
+      'AI Systems That Work For You — AI Agents, Voice AI Receptionists, WhatsApp Automation, Websites + AI, and Business Automation.',
   },
   robots: {
     index: true,
