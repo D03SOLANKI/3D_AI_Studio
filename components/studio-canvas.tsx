@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
+import { Component, ErrorInfo, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Line, OrbitControls, PerspectiveCamera, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
@@ -14,6 +14,20 @@ const nodes: StudioNode[] = [
   { label: 'DATA', position: [2.1, -1.15, 0.2] },
   { label: 'VOICE AI', position: [0, 2.05, -0.1] },
 ];
+
+class CanvasErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.warn('Canvas WebGL error handled:', error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) return this.props.fallback;
+    return this.props.children;
+  }
+}
 
 function Core() {
   const group = useRef<THREE.Group>(null);
@@ -103,13 +117,24 @@ function StudioScene() {
 }
 
 export function StudioCanvas() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const fallback = <div className="absolute inset-0 grid-bg-fine" aria-label="Abstract studio visualization" />;
+
+  if (!mounted) return fallback;
+
   return (
-    <Canvas dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }} fallback={<div className="absolute inset-0 grid-bg-fine" aria-label="Abstract studio visualization" />}>
-      <PerspectiveCamera makeDefault position={[0, 0, 7.6]} fov={42} />
-      <ambientLight intensity={0.25} />
-      <pointLight position={[3, 3, 4]} color="#78a9ff" intensity={1.5} />
-      <StudioScene />
-      <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
-    </Canvas>
+    <CanvasErrorBoundary fallback={fallback}>
+      <Canvas dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }} fallback={fallback}>
+        <PerspectiveCamera makeDefault position={[0, 0, 7.6]} fov={42} />
+        <ambientLight intensity={0.25} />
+        <pointLight position={[3, 3, 4]} color="#78a9ff" intensity={1.5} />
+        <StudioScene />
+        <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+      </Canvas>
+    </CanvasErrorBoundary>
   );
 }
