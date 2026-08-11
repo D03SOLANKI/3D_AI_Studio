@@ -35,10 +35,29 @@ export default function ContactPage() {
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwkJ0bN_Qdt3QhFOzT08hd5DnV6Gzo63-N50NCPxn1Vdz-f7PMJsKeYzOixUftPydPVYg/exec';
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    track('contact_form_submitted', { service: form.service });
-    setSubmitted(true);
+    setLoading(true);
+    setError('');
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      track('contact_form_submitted', { service: form.service });
+      setSubmitted(true);
+    } catch {
+      setError('Something went wrong. Please try again or contact us directly.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -235,12 +254,28 @@ export default function ContactPage() {
                     />
                   </div>
 
+                  {error && (
+                    <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-600 font-mono">
+                      {error}
+                    </p>
+                  )}
+
                   <button
                     type="submit"
-                    className="group flex w-full items-center justify-center gap-3 rounded-full bg-slate-900 px-6 py-4 font-mono text-xs font-bold tracking-[0.2em] text-white transition-all hover:bg-blue-600 hover:text-white shadow-lg shadow-slate-900/10"
+                    disabled={loading}
+                    className="group flex w-full items-center justify-center gap-3 rounded-full bg-slate-900 px-6 py-4 font-mono text-xs font-bold tracking-[0.2em] text-white transition-all hover:bg-blue-600 hover:text-white shadow-lg shadow-slate-900/10 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    SUBMIT INQUIRY
-                    <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    {loading ? (
+                      <>
+                        <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" /></svg>
+                        SENDING...
+                      </>
+                    ) : (
+                      <>
+                        SUBMIT INQUIRY
+                        <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}
