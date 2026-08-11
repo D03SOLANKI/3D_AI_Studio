@@ -4,27 +4,27 @@
 
 @layer base {
   :root {
-    --background: 220 30% 3%;
-    --background-elevated: 220 25% 6%;
-    --foreground: 0 0% 100%;
-    --card: 220 25% 6%;
-    --card-foreground: 0 0% 100%;
-    --popover: 220 25% 6%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 160 100% 50%;
-    --primary-foreground: 220 30% 3%;
-    --secondary: 265 80% 60%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 220 20% 12%;
-    --muted-foreground: 220 10% 65%;
-    --accent: 162 100% 50%;
-    --accent-foreground: 0 0% 100%;
-    --accent-glow: 162 100% 50%;
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 20% 12%;
-    --input: 220 20% 12%;
-    --ring: 162 100% 50%;
+    --background: 210 40% 98%;
+    --background-elevated: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 221.2 83.2% 53.3%;
+    --accent-foreground: 210 40% 98%;
+    --accent-glow: 221.2 83.2% 53.3%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
     --radius: 0.75rem;
   }
 }
@@ -38,71 +38,72 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
-    background-color: #030508;
+    background-color: #fbfcfd;
+    color: #0f172a;
     overflow-x: hidden;
   }
   ::selection {
-    background-color: rgba(0, 255, 179, 0.35);
-    color: #ffffff;
+    background-color: rgba(37, 99, 235, 0.18);
+    color: #0f172a;
   }
 }
 
 @layer utilities {
   .text-accent {
-    color: #00ffb3;
+    color: #2563eb;
   }
   .bg-accent {
-    background-color: #00ffb3;
+    background-color: #2563eb;
   }
   .border-accent {
-    border-color: #00ffb3;
+    border-color: #2563eb;
   }
 
   .text-gradient {
-    background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+    background: linear-gradient(180deg, #020617 0%, #334155 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-accent {
-    background: linear-gradient(135deg, #ffffff 0%, #00ffb3 45%, #a855f7 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #2563eb 55%, #7c3aed 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .glass {
-    background: rgba(8, 12, 20, 0.7);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
   }
 
   .glass-subtle {
-    background: rgba(5, 8, 15, 0.5);
+    background: rgba(248, 250, 252, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
 
   .glow-accent {
-    box-shadow: 0 0 25px rgba(0, 255, 179, 0.25), 0 0 50px rgba(168, 85, 247, 0.15);
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.15), 0 0 50px rgba(13, 148, 136, 0.1);
   }
 
   .glow-accent-strong {
-    box-shadow: 0 0 35px rgba(0, 255, 179, 0.4), 0 0 70px rgba(168, 85, 247, 0.25);
+    box-shadow: 0 0 35px rgba(37, 99, 235, 0.25), 0 0 70px rgba(13, 148, 136, 0.15);
   }
 
   .grid-bg {
     background-image:
-      linear-gradient(rgba(0, 255, 179, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
   .grid-bg-fine {
     background-image:
-      linear-gradient(rgba(0, 255, 179, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
+      linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
     background-size: 20px 20px;
   }
 
@@ -114,9 +115,9 @@
     position: absolute;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-    opacity: 0.02;
+    opacity: 0.015;
     pointer-events: none;
-    mix-blend-mode: overlay;
+    mix-blend-mode: multiply;
   }
 
   .animate-pulse-slow {
@@ -144,7 +145,7 @@
   }
 
   .animate-shimmer {
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 179, 0.15), rgba(168, 85, 247, 0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.08), rgba(13, 148, 136, 0.08), transparent);
     background-size: 200% 100%;
     animation: shimmer 3s ease-in-out infinite;
   }
@@ -195,12 +196,12 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #030508;
+  background: #f8fafc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #111827;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #1f2937;
+  background: #94a3b8;
 }

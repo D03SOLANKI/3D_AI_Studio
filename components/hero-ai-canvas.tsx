@@ -23,16 +23,16 @@ export function HeroAiCanvas() {
 
     window.addEventListener('resize', handleResize);
 
-    // Particle nodes for high-tech Cyber Emerald & Quantum Violet neural mesh
+    // Particle nodes for Light Mode Apple Studio canvas
     const numParticles = Math.min(Math.floor(width / 14), 95);
     const particles = Array.from({ length: numParticles }, (_, i) => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.65,
-      vy: (Math.random() - 0.5) * 0.65,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
       radius: Math.random() * 2.2 + 1,
-      alpha: Math.random() * 0.6 + 0.35,
-      color: i % 2 === 0 ? '#00ffb3' : '#a855f7',
+      alpha: Math.random() * 0.5 + 0.35,
+      color: i % 2 === 0 ? '#2563eb' : '#0d9488',
     }));
 
     let step = 0;
@@ -41,8 +41,8 @@ export function HeroAiCanvas() {
       step += 0.015;
       ctx.clearRect(0, 0, width, height);
 
-      // Draw subtle glowing grid
-      ctx.strokeStyle = 'rgba(0, 255, 179, 0.03)';
+      // Draw subtle slate grid
+      ctx.strokeStyle = 'rgba(37, 99, 235, 0.035)';
       ctx.lineWidth = 1;
       const gridSize = 60;
 
@@ -59,9 +59,9 @@ export function HeroAiCanvas() {
         ctx.stroke();
       }
 
-      // Draw Emerald energy wave beam
+      // Draw Cobalt Blue energy wave beam
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(0, 255, 179, 0.16)';
+      ctx.strokeStyle = 'rgba(37, 99, 235, 0.12)';
       ctx.lineWidth = 1.8;
       for (let x = 0; x < width; x += 5) {
         const y = height * 0.5 + Math.sin(x * 0.005 + step) * 80 + Math.cos(x * 0.008 - step) * 40;
@@ -70,9 +70,9 @@ export function HeroAiCanvas() {
       }
       ctx.stroke();
 
-      // Draw Quantum Violet energy wave beam
+      // Draw Emerald Teal energy wave beam
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(168, 85, 247, 0.18)';
+      ctx.strokeStyle = 'rgba(13, 148, 136, 0.14)';
       ctx.lineWidth = 1.5;
       for (let x = 0; x < width; x += 5) {
         const y = height * 0.45 + Math.cos(x * 0.006 - step * 1.2) * 90;
@@ -101,7 +101,7 @@ export function HeroAiCanvas() {
 
           if (dist < 140) {
             ctx.beginPath();
-            const strokeColor = i % 2 === 0 ? `rgba(0, 255, 179, ${0.25 * (1 - dist / 140)})` : `rgba(168, 85, 247, ${0.25 * (1 - dist / 140)})`;
+            const strokeColor = i % 2 === 0 ? `rgba(37, 99, 235, ${0.18 * (1 - dist / 140)})` : `rgba(13, 148, 136, ${0.18 * (1 - dist / 140)})`;
             ctx.strokeStyle = strokeColor;
             ctx.lineWidth = 0.8;
             ctx.moveTo(p.x, p.y);
@@ -114,7 +114,7 @@ export function HeroAiCanvas() {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = 8;
         ctx.shadowColor = p.color;
         ctx.fill();
         ctx.shadowBlur = 0;
