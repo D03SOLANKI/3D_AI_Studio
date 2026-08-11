@@ -180,7 +180,7 @@ function Hero() {
         </h1>
 
         <p className="mt-10 sm:mt-12 text-sm sm:text-base md:text-xl text-slate-600 max-w-2xl font-normal leading-relaxed">
-          We build premium digital ecosystems—from advanced <strong className="text-slate-900 font-semibold">AI &amp; ML agents</strong> to enterprise <strong className="text-slate-900 font-semibold">Web Platforms</strong> and <strong className="text-slate-900 font-semibold">WhatsApp Automations</strong>—delivering sophisticated user experiences.
+          We engineer intelligent business systems—from autonomous <strong className="text-slate-900 font-semibold">AI agents</strong> to scalable <strong className="text-slate-900 font-semibold">digital platforms</strong> and seamless <strong className="text-slate-900 font-semibold">WhatsApp automation</strong>—built to turn complexity into growth.
         </p>
 
         <div className="mt-12 sm:mt-16 flex justify-center items-center gap-4">
