@@ -725,11 +725,6 @@ function Process() {
                   <p className="mt-3 text-xs leading-relaxed text-slate-600 font-normal">{copy}</p>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4 font-mono text-[9px] text-slate-400">
-                  <span>STAGE // {stepNum}</span>
-                  {!isLast && <span className="text-blue-500 group-hover:translate-x-1 transition-transform">→</span>}
-                </div>
-
                 <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-500 group-hover:w-full" />
               </div>
             );
