@@ -669,11 +669,11 @@ function Services() {
           title="WHAT WE CAN BUILD FOR YOU"
           description="Focused engineering capabilities by AUTOMATE VISION for teams ready to make work more intelligent."
         />
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200/80 sm:grid-cols-2 lg:grid-cols-6 shadow-sm">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
           {services.map((service) => (
-            <div key={service.title} className="bg-white p-6 transition-colors hover:bg-slate-50/90">
-              <h3 className="mt-6 min-h-[48px] text-sm font-semibold tracking-[0.12em] text-slate-900">{service.title}</h3>
-              <ul className="mt-7 space-y-3">
+            <div key={service.title} className="rounded-2xl border border-slate-200/80 bg-white p-6 transition-all duration-300 shadow-sm hover:border-blue-500/40 hover:shadow-md">
+              <h3 className="min-h-[44px] text-sm font-semibold tracking-[0.12em] text-slate-900">{service.title}</h3>
+              <ul className="mt-6 space-y-3">
                 {service.items.map((item) => (
                   <li key={item} className="flex items-center gap-2 text-xs text-slate-600">
                     <Check className="h-3.5 w-3.5 text-blue-600 shrink-0" />
@@ -698,12 +698,12 @@ function Process() {
           title="HOW WE BUILD"
           description="From an idea to a production-ready AI website or automation system."
         />
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200/80 md:grid-cols-3 lg:grid-cols-6 shadow-sm">
+        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
           {processSteps.map(([title, copy]) => (
-            <div key={title} className="group relative bg-white p-6 transition-colors hover:bg-slate-50/90">
-              <h3 className="mt-6 text-sm font-semibold tracking-[0.14em] text-slate-900">{title}</h3>
+            <div key={title} className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 transition-all duration-300 shadow-sm hover:border-blue-500/40 hover:shadow-md">
+              <h3 className="text-sm font-semibold tracking-[0.14em] text-slate-900">{title}</h3>
               <p className="mt-4 text-xs leading-5 text-slate-600">{copy}</p>
-              <div className="absolute bottom-0 left-0 h-px w-0 bg-blue-600 transition-all duration-500 group-hover:w-full" />
+              <div className="absolute bottom-0 left-0 h-1 w-0 bg-blue-600 transition-all duration-500 group-hover:w-full" />
             </div>
           ))}
         </div>
