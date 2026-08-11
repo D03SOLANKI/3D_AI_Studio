@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown, ExternalLink, Github, Globe2, Linkedin, Mail, Menu, MessageCircle, Network, Phone, Play, X, Zap } from 'lucide-react';
 import { StudioCanvas } from '@/components/studio-canvas';
+import { HeroAiCanvas } from '@/components/hero-ai-canvas';
 import { projects, type Project } from '@/lib/projects';
 import { track } from '@/components/analytics';
 
@@ -89,30 +90,34 @@ function Navigation() {
 function Hero() {
   return (
     <section id="top" className="relative flex min-h-screen items-center overflow-hidden border-b border-white/[0.06] pt-20">
-      {/* Background Video Layer inspired by Tarkshy */}
+      {/* Dynamic 60fps Interactive Neural Particle Wave Canvas */}
+      <HeroAiCanvas />
+
+      {/* Layered Cybernetic Video Stream */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="h-full w-full object-cover opacity-45 mix-blend-screen"
+          className="h-full w-full object-cover opacity-35 mix-blend-screen"
         >
-          <source src="https://cdn.pixabay.com/video/2023/07/27/173485-849645876_large.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-circuit-board-digital-lines-41551-large.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-digital-technology-network-nodes-42795-large.mp4" type="video/mp4" />
         </video>
 
         {/* Gradient Overlay for Sleek Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-[#050505]/40 to-[#050505]/95 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/85 via-[#050505]/45 to-[#050505]/95 z-10" />
 
         {/* Sci-Fi Beam Lines */}
-        <div className="absolute top-1/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent animate-pulse z-10" />
-        <div className="absolute top-2/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent z-10" />
+        <div className="absolute top-1/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent animate-pulse z-10" />
+        <div className="absolute top-2/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent z-10" />
       </div>
 
-      <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
-      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.06] blur-[100px] pointer-events-none" />
+      <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.08] blur-[110px] pointer-events-none" />
       
-      <div className="absolute inset-0 opacity-50 pointer-events-none z-0">
+      <div className="absolute inset-0 opacity-60 pointer-events-none z-0">
         <StudioCanvas />
       </div>
 
