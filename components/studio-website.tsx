@@ -238,18 +238,18 @@ function TheVision() {
   const steps = [
     {
       number: '01',
-      title: 'Workflow Intelligence',
-      description: 'Deep strategic audit to pinpoint high-ROI operational bottlenecks and AI automation targets.',
+      title: 'Ideas → Systems',
+      description: 'Transforming operational concepts into structured software architecture and API pipelines.',
     },
     {
       number: '02',
-      title: 'Autonomous Architecture',
-      description: 'Designing custom LLM reasoning engines, Voice AI agents, Web portals, and n8n API pipelines.',
+      title: 'Systems → Intelligence',
+      description: 'Injecting LLMs, RAG vector search, and Voice AI agents into your core workflow logic.',
     },
     {
       number: '03',
-      title: 'Production Deployment',
-      description: 'Engineering resilient, scalable AI agents and automated workflows built for continuous operations.',
+      title: 'Intelligence → Scale',
+      description: 'Deploying resilient, autonomous workflows that scale output with zero operational friction.',
     },
   ];
 
@@ -259,10 +259,11 @@ function TheVision() {
         <p className="text-xs sm:text-sm font-mono tracking-[0.4em] uppercase text-cyan-400 font-semibold mb-8 sm:mb-12 text-center md:text-left">
           THE VISION
         </p>
-        <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1] text-white">
-          We don&apos;t just build. <br />
-          <span className="text-slate-400 font-light">
-            We research, architect, and deploy autonomous AI systems &amp; intelligent automations.
+        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.15] text-white">
+          Ideas become <span className="text-cyan-400 font-normal">systems</span>.<br />
+          Systems become <span className="text-blue-400 font-normal">intelligence</span>.<br />
+          <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">
+            Intelligence becomes scale.
           </span>
         </h2>
 
@@ -694,18 +695,45 @@ function Process() {
     <section id="process" className="border-b border-slate-200/80 py-28 sm:py-36 bg-[#fbfcfd]">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
-          eyebrow="PROCESS"
+          eyebrow="PROCESS METHODOLOGY"
           title="HOW WE BUILD"
-          description="From an idea to a production-ready AI website or automation system."
+          description="From an initial idea to a production-ready AI ecosystem, connected step-by-step."
         />
-        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
-          {processSteps.map(([title, copy]) => (
-            <div key={title} className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 transition-all duration-300 shadow-sm hover:border-blue-500/40 hover:shadow-md">
-              <h3 className="text-sm font-semibold tracking-[0.14em] text-slate-900">{title}</h3>
-              <p className="mt-4 text-xs leading-5 text-slate-600">{copy}</p>
-              <div className="absolute bottom-0 left-0 h-1 w-0 bg-blue-600 transition-all duration-500 group-hover:w-full" />
-            </div>
-          ))}
+
+        {/* Connected Node Chain Grid */}
+        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6 relative">
+          {processSteps.map(([title, copy], index) => {
+            const stepNum = `0${index + 1}`;
+            const isLast = index === processSteps.length - 1;
+
+            return (
+              <div key={title} className="relative group flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-6 transition-all duration-300 shadow-sm hover:border-blue-500/50 hover:shadow-lg">
+                {/* Horizontal Connector Line & Arrow for desktop */}
+                {!isLast && (
+                  <div className="hidden lg:flex items-center absolute -right-3.5 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
+                    <div className="h-0.5 w-3 bg-gradient-to-r from-blue-500 to-indigo-500 shadow-[0_0_8px_rgba(37,99,235,0.4)]" />
+                    <ArrowRight className="h-3 w-3 text-indigo-500 -ml-1" />
+                  </div>
+                )}
+
+                <div>
+                  <div className="flex items-center justify-between font-mono text-xs mb-4">
+                    <span className="font-bold text-blue-600 tracking-wider">{stepNum}</span>
+                    <span className="h-2 w-2 rounded-full bg-blue-500/30 group-hover:bg-blue-600 transition-colors shadow-sm" />
+                  </div>
+                  <h3 className="text-sm font-semibold tracking-[0.14em] text-slate-900">{title}</h3>
+                  <p className="mt-3 text-xs leading-relaxed text-slate-600 font-normal">{copy}</p>
+                </div>
+
+                <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4 font-mono text-[9px] text-slate-400">
+                  <span>STAGE // {stepNum}</span>
+                  {!isLast && <span className="text-blue-500 group-hover:translate-x-1 transition-transform">→</span>}
+                </div>
+
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-500 group-hover:w-full" />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
