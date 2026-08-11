@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown, ExternalLink, Github, Globe2, Linkedin, Mail, Menu, MessageCircle, Network, Phone, Play, X, Zap } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, Globe2, Mail, Menu, MessageCircle, Network, Phone, Sparkles, X, Zap } from 'lucide-react';
 import { StudioCanvas } from '@/components/studio-canvas';
 import { HeroAiCanvas } from '@/components/hero-ai-canvas';
 import { projects, type Project } from '@/lib/projects';
@@ -46,118 +46,164 @@ const services = [
 ];
 
 const processSteps = [
-  ['DISCOVER', 'Understand the business problem.'],
-  ['DESIGN', 'Define architecture and user experience.'],
-  ['BUILD', 'Engineer the product and integrations.'],
-  ['TEST', 'Validate reliability and edge cases.'],
-  ['DEPLOY', 'Launch into production.'],
-  ['OPTIMIZE', 'Monitor, improve and scale.'],
+  ['01', 'DISCOVER', 'Understand the business problem and operational bottleneck.'],
+  ['02', 'DESIGN', 'Define system architecture, user experience, and AI pipelines.'],
+  ['03', 'BUILD', 'Engineer high-performance software and cloud integrations.'],
+  ['04', 'TEST', 'Validate accuracy, reliability, latency, and edge cases.'],
+  ['05', 'DEPLOY', 'Launch into production with continuous monitoring.'],
+  ['06', 'OPTIMIZE', 'Analyze performance telemetry and scale workflows.'],
 ];
 
 const techGroups = [
-  ['AI', 'OpenAI', 'Gemini', 'Claude', 'Groq', 'Sarvam AI'],
-  ['DEVELOPMENT', 'React', 'Next.js', 'TypeScript', 'Python', 'FastAPI', 'Node.js'],
-  ['AUTOMATION', 'n8n', 'APIs', 'Webhooks', 'WhatsApp API'],
-  ['DATA', 'PostgreSQL', 'MongoDB', 'Supabase'],
-  ['AI/ML', 'TensorFlow', 'PyTorch', 'OpenCV', 'LangChain', 'LangGraph'],
-  ['INFRASTRUCTURE', 'Vercel', 'Docker', 'GitHub'],
+  ['AI & ML', 'OpenAI', 'Gemini', 'Claude', 'Groq', 'Sarvam AI', 'LangChain', 'LangGraph'],
+  ['DEVELOPMENT', 'React', 'Next.js 14+', 'TypeScript', 'Python', 'FastAPI', 'Node.js'],
+  ['AUTOMATION', 'n8n', 'APIs', 'Webhooks', 'WhatsApp Business API'],
+  ['DATA & STORAGE', 'PostgreSQL', 'MongoDB', 'Supabase', 'Vector Databases'],
+  ['COMPUTER VISION', 'TensorFlow', 'PyTorch', 'OpenCV', 'MediaPipe'],
+  ['INFRASTRUCTURE', 'Vercel', 'Docker', 'AWS', 'GitHub Actions'],
 ];
 
 function Logo() {
   return (
-    <a href="#top" className="flex items-center gap-3.5" aria-label="AUTOMATE VISION home">
-      <AutomateVisionLogo className="h-9 w-9 shrink-0 drop-shadow-[0_0_15px_rgba(0,102,255,0.7)]" />
+    <a href="#top" className="flex items-center gap-3.5 group outline-none" aria-label="AUTOMATE VISION home">
+      <AutomateVisionLogo className="h-9 w-9 shrink-0 drop-shadow-[0_0_15px_rgba(0,102,255,0.7)] group-hover:scale-105 transition-transform duration-500" />
       <div className="flex flex-col">
         <span className="font-mono text-xs font-extrabold tracking-[0.24em] text-white">
           AUTOMATE<span className="text-cyan-400"> VISION</span>
         </span>
-        <span className="font-mono text-[8px] tracking-[0.16em] text-zinc-400">AI AUTOMATION & DIGITAL SOLUTIONS</span>
+        <span className="font-mono text-[8px] tracking-[0.16em] text-zinc-400">CONSULTANCY & DIGITAL SOLUTIONS</span>
       </div>
     </a>
   );
 }
 
 function ButtonLink({ href, children, outline = false, onClick }: { href: string; children: React.ReactNode; outline?: boolean; onClick?: () => void }) {
-  return <a href={href} onClick={onClick} className={`group inline-flex items-center gap-3 rounded-full px-5 py-3 font-mono text-[10px] font-semibold tracking-[0.18em] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background ${outline ? 'border border-white/15 text-white hover:border-accent/60 hover:bg-accent/10' : 'bg-white text-black hover:bg-accent hover:text-black'}`}>{children}<ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" /></a>;
+  return (
+    <a
+      href={href}
+      onClick={onClick}
+      className={`group relative inline-flex items-center gap-3 rounded-full px-6 py-3 font-mono text-[10px] font-semibold tracking-[0.2em] transition-all duration-300 ${
+        outline
+          ? 'border border-white/30 text-white hover:bg-white hover:text-black'
+          : 'bg-white text-black hover:bg-cyan-400 hover:text-black'
+      }`}
+    >
+      <span className="relative z-10">{children}</span>
+      <ArrowRight className="relative z-10 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+    </a>
+  );
 }
 
 function Navigation() {
   const [open, setOpen] = useState(false);
-  const links = [['WORK', '#work'], ['SERVICES', '#services'], ['PROCESS', '#process'], ['ABOUT', '#about'], ['CONTACT', '#contact']];
-  return <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#050505]/80 backdrop-blur-xl"><div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8"><Logo /><nav className="hidden items-center gap-8 md:flex">{links.map(([label, href]) => <a key={href} href={href} className="font-mono text-[10px] tracking-[0.18em] text-zinc-500 transition-colors hover:text-white">{label}</a>)}</nav><div className="hidden md:block"><ButtonLink href="/contact" onClick={() => track('cta_click', { location: 'nav' })}>LET&apos;S BUILD</ButtonLink></div><button className="rounded-full border border-white/10 p-2.5 text-white md:hidden" onClick={() => setOpen(!open)} aria-label={open ? 'Close menu' : 'Open menu'}>{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button></div><AnimatePresence>{open && <motion.nav initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="border-t border-white/[0.06] bg-[#050505] px-5 py-5 md:hidden">{links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)} className="block border-b border-white/[0.06] py-4 font-mono text-xs tracking-[0.2em] text-zinc-300">{label}</a>)}<a href="/contact" onClick={() => setOpen(false)} className="mt-5 block rounded-full bg-white px-5 py-3 text-center font-mono text-[10px] font-semibold tracking-[0.18em] text-black">LET&apos;S BUILD <ArrowRight className="ml-2 inline h-3.5 w-3.5" /></a></motion.nav>}</AnimatePresence></header>;
+  const links = [
+    ['WORK', '#work'],
+    ['CAPABILITIES', '#capabilities'],
+    ['SERVICES', '#services'],
+    ['PROCESS', '#process'],
+    ['VISION', '#vision'],
+    ['ABOUT', '#about'],
+    ['CONTACT', '#contact'],
+  ];
+
+  return (
+    <header className="fixed inset-x-0 top-0 z-50 h-20 border-b border-white/10 bg-black/40 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-5 sm:px-8">
+        <Logo />
+        <nav className="hidden items-center gap-8 lg:flex">
+          {links.map(([label, href]) => (
+            <a key={href} href={href} className="font-mono text-[10px] tracking-[0.2em] text-neutral-300 transition-colors hover:text-white">
+              {label}
+            </a>
+          ))}
+        </nav>
+        <div className="hidden lg:block">
+          <ButtonLink href="/contact" onClick={() => track('cta_click', { location: 'nav' })}>
+            START PROJECT
+          </ButtonLink>
+        </div>
+        <button className="rounded-full border border-white/10 p-2.5 text-white lg:hidden" onClick={() => setOpen(!open)} aria-label={open ? 'Close menu' : 'Open menu'}>
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.nav initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="border-t border-white/10 bg-neutral-950 px-5 py-6 lg:hidden">
+            {links.map(([label, href]) => (
+              <a key={href} href={href} onClick={() => setOpen(false)} className="block border-b border-white/5 py-4 font-mono text-xs tracking-[0.2em] text-neutral-300 hover:text-white">
+                {label}
+              </a>
+            ))}
+            <a href="/contact" onClick={() => setOpen(false)} className="mt-6 block rounded-full bg-white px-5 py-3.5 text-center font-mono text-[10px] font-bold tracking-[0.2em] text-black">
+              START PROJECT <ArrowRight className="ml-2 inline h-3.5 w-3.5" />
+            </a>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
+  );
 }
 
 function Hero() {
   return (
-    <section id="top" className="relative flex min-h-screen items-center overflow-hidden border-b border-white/[0.06] pt-20">
-      {/* Dynamic 60fps Interactive Neural Particle Wave Canvas */}
+    <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden border-b border-white/10 bg-black pt-24 text-white">
+      {/* 60fps Interactive Neural Particle Wave Canvas */}
       <HeroAiCanvas />
 
-      {/* Layered Cybernetic Video Stream */}
+      {/* Cybernetic Video Stream */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="h-full w-full object-cover opacity-35 mix-blend-screen"
-        >
+        <video autoPlay loop muted playsInline className="h-full w-full object-cover opacity-35 mix-blend-screen">
           <source src="https://assets.mixkit.co/videos/preview/mixkit-circuit-board-digital-lines-41551-large.mp4" type="video/mp4" />
           <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-digital-technology-network-nodes-42795-large.mp4" type="video/mp4" />
         </video>
-
-        {/* Gradient Overlay for Sleek Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/85 via-[#050505]/45 to-[#050505]/95 z-10" />
-
-        {/* Sci-Fi Beam Lines */}
-        <div className="absolute top-1/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent animate-pulse z-10" />
-        <div className="absolute top-2/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/45 to-black/95 z-10 pointer-events-none" />
+        <div className="absolute top-1/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent animate-pulse z-10" />
+        <div className="absolute top-2/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent z-10" />
       </div>
 
       <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
-      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.08] blur-[110px] pointer-events-none" />
+      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.08] blur-[120px] pointer-events-none" />
       
       <div className="absolute inset-0 opacity-60 pointer-events-none z-0">
         <StudioCanvas />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 sm:px-8">
-        <div className="max-w-3xl">
-          <div className="mb-7 flex items-center gap-3 font-mono text-[10px] tracking-[0.24em] text-accent">
-            <span className="h-px w-8 bg-accent" />
-            AUTOMATE VISION // CONSULTANCY & DIGITAL SOLUTIONS
-          </div>
-          <h1 className="max-w-3xl text-5xl font-medium tracking-tighter leading-[0.92] text-white sm:text-7xl lg:text-[6.5rem]">
-            Architecting <br />
-            <span className="text-white/90">Intelligent</span>{' '}
-            <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-200 to-cyan-400">
-              Ecosystems.
-            </span>
-          </h1>
-          <p className="mt-8 max-w-xl text-base leading-7 text-zinc-400 sm:text-lg">
-            We build premium digital ecosystems—from advanced <strong className="text-white font-normal">AI &amp; ML agents</strong> to enterprise <strong className="text-white font-normal">Web Platforms</strong> and <strong className="text-white font-normal">WhatsApp Automations</strong>—delivering sophisticated user experiences.
-          </p>
-          <p className="mt-6 font-mono text-[9px] tracking-[0.18em] text-zinc-500">
-            AUTOMATE <span className="text-accent">•</span> INNOVATE <span className="text-accent">•</span> ELEVATE
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <ButtonLink href="#work" onClick={() => track('cta_click', { location: 'hero_work' })}>
-              EXPLORE OUR WORK
-            </ButtonLink>
-            <ButtonLink href="/contact" outline onClick={() => track('cta_click', { location: 'hero_contact' })}>
-              START PROJECT
-            </ButtonLink>
-          </div>
-        </div>
-        <div className="mt-24 flex items-center gap-3 font-mono text-[9px] tracking-[0.2em] text-zinc-600">
-          <span className="animate-scroll-indicator">
-            <ChevronDown className="h-4 w-4 text-accent" />
+      <div className="relative z-20 mx-auto w-full max-w-5xl px-6 py-28 text-center flex flex-col items-center">
+        <div className="mb-8 flex items-center justify-center gap-3">
+          <span className="hidden sm:block h-[1px] w-8 bg-white/30" />
+          <span className="text-[10px] md:text-xs font-mono font-medium text-white/50 uppercase tracking-[0.4em]">
+            AUTOMATE VISION CONSULTANCY & DIGITAL SOLUTIONS
           </span>
-          SCROLL TO EXPLORE AUTOMATE VISION
+          <span className="hidden sm:block h-[1px] w-8 bg-white/30" />
         </div>
-      </div>
-      <div className="absolute bottom-0 right-5 hidden font-mono text-[9px] tracking-[0.2em] text-zinc-700 sm:right-8 sm:block z-10">
-        SYS.INIT
+
+        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-medium tracking-tighter leading-[0.9] text-white">
+          Architecting <br />
+          <span className="text-white/90">Digital</span>{' '}
+          <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-100 to-cyan-400">
+            Excellence.
+          </span>
+        </h1>
+
+        <p className="mt-10 sm:mt-12 text-sm sm:text-base md:text-xl text-neutral-400 max-w-2xl font-light leading-relaxed">
+          We build premium digital ecosystems—from advanced <strong className="text-white font-normal">AI &amp; ML agents</strong> to enterprise <strong className="text-white font-normal">Web Platforms</strong> and <strong className="text-white font-normal">WhatsApp Automations</strong>—delivering sophisticated user experiences.
+        </p>
+
+        <div className="mt-12 sm:mt-16 flex justify-center items-center gap-4">
+          <ButtonLink href="#work" onClick={() => track('cta_click', { location: 'hero_work' })}>
+            EXPLORE OUR WORK
+          </ButtonLink>
+          <ButtonLink href="/contact" outline onClick={() => track('cta_click', { location: 'hero_contact' })}>
+            START PROJECT
+          </ButtonLink>
+        </div>
+
+        <div className="mt-20 flex flex-col items-center gap-3 font-mono text-[9px] tracking-[0.2em] text-neutral-500">
+          <div className="w-[1px] h-10 bg-white/20 relative overflow-hidden">
+            <div className="w-full h-1/2 bg-white animate-pulse" />
+          </div>
+          <span>SCROLL TO EXPLORE</span>
+        </div>
       </div>
     </section>
   );
@@ -178,13 +224,13 @@ function Marquee() {
   ];
 
   return (
-    <section className="relative overflow-hidden border-b border-t border-white/5 bg-[#030303] py-10">
-      <div className="mx-auto mb-6 text-center font-mono text-[10px] tracking-[0.3em] text-zinc-500 uppercase">
+    <section className="relative overflow-hidden border-b border-t border-white/5 bg-black py-12">
+      <div className="mx-auto mb-6 text-center font-mono text-[10px] tracking-[0.4em] text-neutral-500 uppercase">
         AUTOMATE VISION CAPABILITIES
       </div>
-      <div className="flex w-max animate-marquee gap-8 whitespace-nowrap">
+      <div className="flex w-max animate-marquee gap-10 whitespace-nowrap">
         {[...items, ...items, ...items, ...items].map((item, index) => (
-          <div key={index} className="flex items-center gap-8 font-mono text-sm tracking-[0.2em] text-zinc-300 transition-colors hover:text-white cursor-default">
+          <div key={index} className="flex items-center gap-8 font-mono text-sm sm:text-base tracking-[0.2em] text-neutral-300 transition-colors hover:text-white cursor-default">
             <span className="text-cyan-400">•</span>
             <span>{item}</span>
           </div>
@@ -199,45 +245,39 @@ function TheVision() {
     {
       number: '01',
       title: 'Research & Strategy',
-      description: 'Deep strategic analysis of your business workflows before a single line of code is written.',
+      description: 'Deep strategic analysis of your business workflows before a single line of code is ever written.',
     },
     {
       number: '02',
       title: 'Architecture & Engineering',
-      description: 'Scalable, resilient architecture across AI Agents, Voice AI, Web Platforms, and Cloud APIs.',
+      description: 'Scalable, resilient engineering across Web, Voice AI, LLMs, and Cloud Infrastructure.',
     },
     {
       number: '03',
       title: 'Execution & Deployment',
-      description: 'Delivering production-ready AI systems, continuous automation pipelines, and high-converting platforms.',
+      description: 'Delivering premium, high-performance digital systems and automated operational pipelines.',
     },
   ];
 
   return (
-    <section className="relative overflow-hidden bg-white py-24 text-black sm:py-36">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="mb-8 font-mono text-[10px] tracking-[0.24em] text-zinc-500 uppercase">
+    <section id="vision" className="relative overflow-hidden bg-white py-20 sm:py-32 text-black">
+      <div className="mx-auto max-w-5xl px-6">
+        <p className="text-xs sm:text-sm font-mono tracking-[0.4em] uppercase text-neutral-400 mb-8 sm:mb-12 text-center md:text-left">
           THE VISION
-        </div>
-        <h2 className="max-w-4xl text-4xl font-medium tracking-tight leading-[1.08] sm:text-6xl lg:text-7xl">
-          We don&apos;t just build websites. <br />
-          <span className="text-zinc-600">
-            We research, architect, and engineer premium digital ecosystems.
+        </p>
+        <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1]">
+          We don&apos;t just build. <br />
+          <span className="text-neutral-500 font-light">
+            We research, architect, and engineer premium digital solutions.
           </span>
         </h2>
 
-        <div className="mt-20 grid gap-10 border-t border-black/15 pt-12 sm:grid-cols-3">
+        <div className="mt-16 sm:mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 border-t border-black/10 pt-12 sm:pt-16">
           {steps.map((step) => (
             <div key={step.number} className="flex flex-col gap-4">
-              <span className="font-light text-4xl sm:text-5xl text-zinc-400 font-mono">
-                {step.number}
-              </span>
-              <h3 className="text-xl font-medium tracking-tight text-black">
-                {step.title}
-              </h3>
-              <p className="text-sm leading-6 text-zinc-600">
-                {step.description}
-              </p>
+              <span className="text-4xl sm:text-5xl font-light font-mono text-neutral-400">{step.number}</span>
+              <h3 className="text-lg sm:text-xl font-medium text-black">{step.title}</h3>
+              <p className="text-neutral-500 text-sm leading-relaxed">{step.description}</p>
             </div>
           ))}
         </div>
@@ -246,101 +286,372 @@ function TheVision() {
   );
 }
 
-function SectionHeading({ eyebrow, title, description, light = false }: { eyebrow: string; title: string; description?: string; light?: boolean }) {
-  return <div className="mb-14 max-w-2xl"><div className="mb-5 flex items-center gap-3 font-mono text-[10px] tracking-[0.24em] text-accent"><span className="h-px w-8 bg-accent" />{eyebrow}</div><h2 className={`text-4xl font-bold leading-[0.98] tracking-[-0.04em] sm:text-6xl ${light ? 'text-black' : 'text-white'}`}>{title}<span className={light ? 'text-cyan-600' : 'text-accent'}>.</span></h2>{description && <p className={`mt-6 max-w-lg text-base leading-7 ${light ? 'text-zinc-600' : 'text-zinc-400'}`}>{description}</p>}</div>;
+function SectionHeading({ eyebrow, title, description }: { eyebrow: string; title: string; description?: string }) {
+  return (
+    <div className="mb-16 max-w-3xl">
+      <p className="text-xs sm:text-sm font-mono tracking-[0.4em] uppercase text-neutral-500 mb-4 flex items-center gap-3">
+        <span className="h-[1px] w-6 bg-cyan-400" />
+        {eyebrow}
+      </p>
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-medium tracking-tight text-white leading-[1.05]">
+        {title}
+      </h2>
+      {description && <p className="mt-6 text-sm sm:text-base text-neutral-400 font-light leading-relaxed">{description}</p>}
+    </div>
+  );
 }
 
 function Capabilities() {
   const [active, setActive] = useState(0);
-  return <section id="capabilities" className="relative border-b border-white/[0.06] py-28 sm:py-36"><div className="mx-auto max-w-7xl px-5 sm:px-8"><SectionHeading eyebrow="CAPABILITIES" title="WHAT WE BUILD" description="From AI agents and voice receptionists to AI-powered websites and business automation, we build technology around real business workflows." /><div className="grid gap-3 lg:grid-cols-[1.1fr_0.9fr]"><div className="space-y-2">{capabilities.map((capability, index) => { const Icon = capability.icon; return <button key={capability.id} onMouseEnter={() => setActive(index)} onFocus={() => setActive(index)} onClick={() => setActive(index)} className={`group flex w-full items-center gap-4 rounded-xl border p-5 text-left transition-all duration-500 ${active === index ? 'border-accent/45 bg-accent/[0.07] shadow-[0_0_35px_rgba(0,217,255,0.06)]' : 'border-white/[0.07] bg-white/[0.015] hover:border-white/20'}`}><span className={`grid h-10 w-10 place-items-center rounded-lg border transition-colors ${active === index ? 'border-accent/40 bg-accent/10 text-accent' : 'border-white/10 text-zinc-500'}`}><Icon className="h-4 w-4" /></span><span className="flex-1 font-semibold tracking-[0.16em] text-white">{capability.title}</span><ArrowRight className={`h-4 w-4 transition-all ${active === index ? 'translate-x-0 text-accent opacity-100' : '-translate-x-2 text-zinc-600 opacity-0 group-hover:translate-x-0 group-hover:opacity-100'}`} /></button>; })}</div><motion.div key={active} initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} className="relative min-h-[310px] overflow-hidden rounded-xl border border-accent/20 bg-[#090f11] p-7 sm:p-9"><div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-accent/[0.08] blur-[60px]" /><div className="relative"><div className="mb-14 font-mono text-[10px] tracking-[0.2em] text-accent">MODULE // {capabilities[active].title}</div><h3 className="text-3xl font-semibold tracking-[-0.03em] text-white">{capabilities[active].title}</h3><p className="mt-4 max-w-sm leading-7 text-zinc-400">{capabilities[active].description}</p><div className="mt-7 flex flex-wrap gap-2">{capabilities[active].examples.map((example) => <span key={example} className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[9px] tracking-[0.08em] text-zinc-400">{example}</span>)}</div></div><div className="absolute bottom-6 right-7 font-mono text-[9px] tracking-[0.2em] text-zinc-700">ACTIVE NODE</div></motion.div></div></div></section>;
+  return (
+    <section id="capabilities" className="relative border-b border-white/5 bg-black py-24 sm:py-36 text-white">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <SectionHeading eyebrow="CAPABILITIES" title="What We Build." description="From AI agents and voice receptionists to AI-powered web portals and business automation." />
+        <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="space-y-3">
+            {capabilities.map((capability, index) => {
+              const Icon = capability.icon;
+              return (
+                <button
+                  key={capability.id}
+                  onMouseEnter={() => setActive(index)}
+                  onFocus={() => setActive(index)}
+                  onClick={() => setActive(index)}
+                  className={`group flex w-full items-center gap-5 rounded-2xl border p-6 text-left transition-all duration-300 ${
+                    active === index
+                      ? 'border-cyan-400/50 bg-cyan-500/[0.08] shadow-[0_0_40px_rgba(0,217,255,0.08)]'
+                      : 'border-white/10 bg-neutral-950 hover:border-white/20'
+                  }`}
+                >
+                  <span className={`grid h-11 w-11 place-items-center rounded-xl border transition-colors ${active === index ? 'border-cyan-400/40 bg-cyan-400/10 text-cyan-400' : 'border-white/10 text-neutral-500'}`}>
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="flex-1 font-mono text-sm font-semibold tracking-[0.16em] text-white">{capability.title}</span>
+                  <ArrowRight className={`h-4 w-4 transition-all ${active === index ? 'translate-x-0 text-cyan-400 opacity-100' : '-translate-x-2 text-neutral-600 opacity-0 group-hover:translate-x-0 group-hover:opacity-100'}`} />
+                </button>
+              );
+            })}
+          </div>
+          <motion.div key={active} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="relative min-h-[340px] overflow-hidden rounded-2xl border border-cyan-400/30 bg-[#070d0f] p-8 sm:p-10">
+            <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-cyan-400/[0.08] blur-[80px]" />
+            <div className="relative">
+              <div className="mb-10 font-mono text-[10px] tracking-[0.24em] text-cyan-400 uppercase">MODULE // {capabilities[active].title}</div>
+              <h3 className="text-3xl font-medium tracking-tight text-white sm:text-4xl">{capabilities[active].title}</h3>
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400 font-light">{capabilities[active].description}</p>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {capabilities[active].examples.map((example) => (
+                  <span key={example} className="rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 font-mono text-[10px] tracking-[0.1em] text-neutral-300">
+                    {example}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="absolute bottom-8 right-8 font-mono text-[10px] tracking-[0.24em] text-neutral-600 uppercase">ACTIVE NODE</div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function ProjectVisual({ project }: { project: Project }) {
-  return <div className="relative h-56 overflow-hidden border-b border-white/[0.07] bg-[#080c0d]"><div className="absolute inset-0 grid-bg-fine opacity-60" /><div className="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/30 shadow-[0_0_50px_rgba(0,217,255,0.13)]" style={{ borderColor: `${project.accent}55` }}><div className="absolute inset-5 rounded-full border border-dashed border-accent/40" style={{ borderColor: `${project.accent}66` }} /><div className="absolute inset-0 m-auto h-3 w-3 rounded-full bg-accent shadow-[0_0_20px_#00d9ff]" style={{ backgroundColor: project.accent, boxShadow: `0 0 20px ${project.accent}` }} /></div>{[0, 1, 2, 3].map((i) => <span key={i} className="absolute h-1.5 w-1.5 rounded-full bg-accent" style={{ left: `${18 + i * 22}%`, top: `${25 + (i % 2) * 45}%`, backgroundColor: project.accent, boxShadow: `0 0 10px ${project.accent}` }} />)}<div className="absolute bottom-4 left-5 font-mono text-[9px] tracking-[0.18em] text-zinc-600">VISUAL.SYSTEM // {project.visual.toUpperCase()}</div></div>;
+  return (
+    <div className="relative h-60 overflow-hidden border-b border-white/10 bg-neutral-900">
+      <div className="absolute inset-0 grid-bg opacity-40" />
+      <div className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/30 shadow-[0_0_60px_rgba(0,217,255,0.15)]" style={{ borderColor: `${project.accent}55` }}>
+        <div className="absolute inset-6 rounded-full border border-dashed border-cyan-400/40" style={{ borderColor: `${project.accent}66` }} />
+        <div className="absolute inset-0 m-auto h-4 w-4 rounded-full bg-cyan-400 shadow-[0_0_24px_#00d9ff]" style={{ backgroundColor: project.accent, boxShadow: `0 0 24px ${project.accent}` }} />
+      </div>
+      <div className="absolute bottom-4 left-5 font-mono text-[9px] tracking-[0.2em] text-neutral-500 uppercase">SYSTEM.VISUAL // {project.visual}</div>
+    </div>
+  );
 }
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   useEffect(() => { document.body.style.overflow = 'hidden'; return () => { document.body.style.overflow = ''; }; }, []);
-  return <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[60] overflow-y-auto bg-black/80 p-4 backdrop-blur-md sm:p-8" onClick={onClose}><motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} onClick={(event) => event.stopPropagation()} className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-[#0a0c0d] shadow-2xl"><div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-4 sm:px-8"><div className="font-mono text-[10px] tracking-[0.2em] text-accent">CASE STUDY</div><button onClick={onClose} className="rounded-full border border-white/10 p-2 text-zinc-400 transition-colors hover:text-white" aria-label="Close case study"><X className="h-4 w-4" /></button></div><div className="grid lg:grid-cols-[1.05fr_0.95fr]"><div className="p-6 sm:p-10"><div className="font-mono text-[10px] tracking-[0.18em] text-zinc-500">{project.category}</div><h2 className="mt-4 text-4xl font-bold tracking-[-0.04em] text-white sm:text-6xl">{project.title}<span className="text-accent">.</span></h2><p className="mt-6 leading-7 text-zinc-400">{project.description}</p><div className="mt-8 grid gap-6 sm:grid-cols-2"><div><div className="font-mono text-[9px] tracking-[0.18em] text-accent">THE PROBLEM</div><p className="mt-3 text-sm leading-6 text-zinc-400">{project.problem}</p></div><div><div className="font-mono text-[9px] tracking-[0.18em] text-accent">THE SOLUTION</div><p className="mt-3 text-sm leading-6 text-zinc-400">{project.solution}</p></div></div><div className="mt-8"><div className="font-mono text-[9px] tracking-[0.18em] text-accent">TECHNOLOGY</div><div className="mt-3 flex flex-wrap gap-2">{project.technologies.map((tech) => <span key={tech} className="rounded border border-white/10 px-2.5 py-1.5 font-mono text-[9px] text-zinc-400">{tech}</span>)}</div></div><div className="mt-8"><div className="font-mono text-[9px] tracking-[0.18em] text-accent">RESULT</div><p className="mt-3 text-sm leading-6 text-zinc-300">{project.result}</p></div></div><div className="border-t border-white/[0.07] bg-[#070909] p-6 sm:p-10 lg:border-l lg:border-t-0"><div className="font-mono text-[9px] tracking-[0.18em] text-accent">ARCHITECTURE</div><div className="mt-6 space-y-2">{project.architecture.map((step) => <div key={step} className="flex items-center gap-3"><span className="rounded border border-white/10 bg-white/[0.02] px-3 py-2 font-mono text-[10px] tracking-[0.08em] text-zinc-300">{step}</span></div>)}</div>{project.metrics && <div className="mt-8 border-t border-white/[0.07] pt-6"><div className="font-mono text-[9px] tracking-[0.18em] text-accent">VERIFIED SIGNALS</div>{project.metrics.map((metric) => <div key={metric} className="mt-3 text-2xl font-semibold text-white">{metric}</div>)}</div>}</div></div></motion.div></motion.div>;
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[60] overflow-y-auto bg-black/85 p-4 backdrop-blur-md sm:p-8" onClick={onClose}>
+      <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} onClick={(e) => e.stopPropagation()} className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 shadow-2xl">
+        <div className="flex items-center justify-between border-b border-white/10 px-6 py-5 sm:px-8">
+          <div className="font-mono text-[10px] tracking-[0.24em] text-cyan-400 uppercase">CASE STUDY</div>
+          <button onClick={onClose} className="rounded-full border border-white/10 p-2 text-neutral-400 transition-colors hover:text-white" aria-label="Close modal">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="p-7 sm:p-10">
+            <div className="font-mono text-[10px] tracking-[0.2em] text-neutral-500 uppercase">{project.category}</div>
+            <h2 className="mt-4 text-4xl font-medium tracking-tight text-white sm:text-5xl">{project.title}</h2>
+            <p className="mt-6 text-sm leading-relaxed text-neutral-400 font-light">{project.description}</p>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2">
+              <div>
+                <div className="font-mono text-[10px] tracking-[0.2em] text-cyan-400 uppercase">THE PROBLEM</div>
+                <p className="mt-3 text-xs sm:text-sm leading-relaxed text-neutral-400">{project.problem}</p>
+              </div>
+              <div>
+                <div className="font-mono text-[10px] tracking-[0.2em] text-cyan-400 uppercase">THE SOLUTION</div>
+                <p className="mt-3 text-xs sm:text-sm leading-relaxed text-neutral-400">{project.solution}</p>
+              </div>
+            </div>
+            <div className="mt-8">
+              <div className="font-mono text-[10px] tracking-[0.2em] text-cyan-400 uppercase mb-3">TECHNOLOGY STACK</div>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span key={tech} className="rounded-full border border-white/10 bg-white/[0.02] px-3 py-1 font-mono text-[10px] text-neutral-300">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="mt-8">
+              <div className="font-mono text-[10px] tracking-[0.2em] text-cyan-400 uppercase">VERIFIED RESULT</div>
+              <p className="mt-3 text-sm leading-relaxed text-neutral-200 font-medium">{project.result}</p>
+            </div>
+          </div>
+          <div className="border-t border-white/10 bg-neutral-900/50 p-7 sm:p-10 lg:border-l lg:border-t-0">
+            <div className="font-mono text-[10px] tracking-[0.2em] text-cyan-400 uppercase">ARCHITECTURE PIPELINE</div>
+            <div className="mt-6 space-y-3">
+              {project.architecture.map((step) => (
+                <div key={step} className="flex items-center gap-3">
+                  <span className="rounded-lg border border-white/10 bg-black px-3.5 py-2 font-mono text-[10px] tracking-[0.1em] text-neutral-300">{step}</span>
+                </div>
+              ))}
+            </div>
+            {project.metrics && (
+              <div className="mt-10 border-t border-white/10 pt-6">
+                <div className="font-mono text-[10px] tracking-[0.2em] text-cyan-400 uppercase">TELEMETRY SIGNAL</div>
+                {project.metrics.map((metric) => (
+                  <div key={metric} className="mt-3 text-2xl font-medium text-white">{metric}</div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
 }
 
 function Work() {
   const [selected, setSelected] = useState<Project | null>(null);
-  return <section id="work" className="relative border-b border-white/[0.06] py-28 sm:py-36"><div className="mx-auto max-w-7xl px-5 sm:px-8"><SectionHeading eyebrow="SELECTED WORK" title="SYSTEMS THAT SHIP" description="Systems and AI websites engineered by AUTOMATE VISION to solve real-world business problems." /><div className="grid gap-4 md:grid-cols-2">{projects.map((project, index) => <motion.button key={project.id} whileHover={{ y: -4 }} onClick={() => { setSelected(project); track('project_opened', { project: project.id }); }} className={`group overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.02] text-left transition-colors hover:border-accent/40 ${index === 0 ? 'md:col-span-2 lg:grid lg:grid-cols-2' : ''}`}><ProjectVisual project={project} /><div className="p-6 sm:p-7"><div className="flex items-center justify-between font-mono text-[9px] tracking-[0.18em] text-zinc-600"><span>{project.category}</span><ArrowUpRight className="h-4 w-4" /></div><h3 className="mt-8 text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl">{project.title}<span className="text-accent">.</span></h3><p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">{project.description}</p><div className="mt-6 flex flex-wrap gap-2">{project.technologies.slice(0, 5).map((tech) => <span key={tech} className="font-mono text-[9px] tracking-[0.08em] text-zinc-600">{tech}</span>)}</div><div className="mt-7 flex items-center gap-2 font-mono text-[9px] font-semibold tracking-[0.18em] text-white transition-colors group-hover:text-accent">VIEW CASE STUDY <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></div></div></motion.button>)}</div></div><AnimatePresence>{selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}</AnimatePresence></section>;
+  return (
+    <section id="work" className="relative border-b border-white/5 bg-black py-24 sm:py-36 text-white">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <SectionHeading eyebrow="SELECTED WORKS" title="Evidence of Execution." description="Case studies & production AI systems engineered for real-world enterprise operations." />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <motion.div
+              key={project.id}
+              whileHover={{ y: -6 }}
+              onClick={() => { setSelected(project); track('project_opened', { project: project.id }); }}
+              className="group cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-neutral-950 transition-all duration-500 hover:border-cyan-400/40"
+            >
+              <ProjectVisual project={project} />
+              <div className="p-6 sm:p-8">
+                <div className="flex items-center justify-between font-mono text-[9px] tracking-[0.2em] text-neutral-500 uppercase">
+                  <span>{project.category}</span>
+                  <ArrowUpRight className="h-4 w-4 group-hover:text-cyan-400 transition-colors" />
+                </div>
+                <h3 className="mt-6 text-2xl font-medium tracking-tight text-white">{project.title}</h3>
+                <p className="mt-3 text-xs sm:text-sm leading-relaxed text-neutral-400 font-light line-clamp-3">{project.description}</p>
+                <div className="mt-6 flex flex-wrap gap-1.5">
+                  {project.technologies.slice(0, 4).map((tech) => (
+                    <span key={tech} className="font-mono text-[9px] tracking-[0.08em] text-neutral-500">{tech} •</span>
+                  ))}
+                </div>
+                <div className="mt-6 flex items-center gap-2 font-mono text-[10px] font-semibold tracking-[0.2em] text-white transition-colors group-hover:text-cyan-400">
+                  VIEW CASE STUDY <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+      <AnimatePresence>{selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}</AnimatePresence>
+    </section>
+  );
 }
 
 function SystemMap() {
-  return <section className="relative overflow-hidden border-b border-white/[0.06] py-28 sm:py-36"><div className="absolute inset-0 grid-bg opacity-40" /><div className="relative mx-auto max-w-7xl px-5 sm:px-8"><SectionHeading eyebrow="SYSTEM MAP" title="CONNECT YOUR BUSINESS TO INTELLIGENCE" description="We connect disconnected tools, web portals, and WhatsApp channels into intelligent workflows that move information seamlessly." /><div className="relative mx-auto max-w-4xl rounded-2xl border border-accent/20 bg-[#071012] p-6 sm:p-12"><div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_center,rgba(0,217,255,0.08),transparent_55%)]" /><div className="relative grid grid-cols-3 items-center gap-5 sm:gap-10"><div className="space-y-16 text-right font-mono text-[10px] tracking-[0.14em] text-zinc-400 sm:text-xs"><div>AI WEBSITE</div><div>WHATSAPP</div></div><div className="relative flex flex-col items-center gap-7"><div className="absolute left-1/2 top-1/2 h-[180%] w-px -translate-x-1/2 -translate-y-1/2 bg-gradient-to-b from-transparent via-accent/50 to-transparent" /><div className="relative grid h-28 w-28 place-items-center rounded-full border border-accent/50 bg-[#0b242a] text-center font-mono text-[10px] tracking-[0.14em] text-accent shadow-[0_0_50px_rgba(0,217,255,0.18)] sm:h-36 sm:w-36"><span>AI<br />CORE</span></div><div className="relative flex h-16 w-40 items-center justify-center rounded-lg border border-accent/25 bg-[#0a181a] font-mono text-[9px] tracking-[0.12em] text-zinc-300">AUTOMATION ENGINE</div></div><div className="space-y-16 font-mono text-[10px] tracking-[0.14em] text-zinc-400 sm:text-xs"><div>VOICE AI</div><div>DATA</div></div></div><div className="mt-12 flex items-center justify-center gap-4 border-t border-white/10 pt-8 font-mono text-[10px] tracking-[0.14em] text-zinc-500"><span className="h-px w-12 bg-accent/50" />DATABASE<span className="h-px w-12 bg-accent/50" /></div></div></div></section>;
+  return (
+    <section className="relative overflow-hidden border-b border-white/5 bg-black py-24 sm:py-36 text-white">
+      <div className="absolute inset-0 grid-bg opacity-30" />
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+        <SectionHeading eyebrow="SYSTEM MAP" title="Ecosystem Architecture." description="We connect disconnected tools, web portals, and WhatsApp channels into intelligent workflows that move information seamlessly." />
+        <div className="relative mx-auto max-w-4xl rounded-3xl border border-cyan-400/30 bg-[#060c0e] p-8 sm:p-14 shadow-2xl">
+          <div className="absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_center,rgba(0,217,255,0.09),transparent_60%)] pointer-events-none" />
+          <div className="relative grid grid-cols-3 items-center gap-6 sm:gap-12">
+            <div className="space-y-16 text-right font-mono text-[10px] tracking-[0.2em] text-neutral-400 sm:text-xs">
+              <div>AI WEBSITE</div>
+              <div>WHATSAPP</div>
+            </div>
+            <div className="relative flex flex-col items-center gap-7">
+              <div className="absolute left-1/2 top-1/2 h-[180%] w-px -translate-x-1/2 -translate-y-1/2 bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent" />
+              <div className="relative grid h-32 w-32 place-items-center rounded-full border border-cyan-400/50 bg-[#0a2328] text-center font-mono text-[11px] font-bold tracking-[0.2em] text-cyan-400 shadow-[0_0_60px_rgba(0,217,255,0.22)] sm:h-40 sm:w-40">
+                <span>AI<br />CORE</span>
+              </div>
+              <div className="relative flex h-16 w-44 items-center justify-center rounded-xl border border-cyan-400/30 bg-[#09171a] font-mono text-[9px] tracking-[0.16em] text-neutral-300">AUTOMATION ENGINE</div>
+            </div>
+            <div className="space-y-16 font-mono text-[10px] tracking-[0.2em] text-neutral-400 sm:text-xs">
+              <div>VOICE AI</div>
+              <div>DATA</div>
+            </div>
+          </div>
+          <div className="mt-14 flex items-center justify-center gap-4 border-t border-white/10 pt-8 font-mono text-[10px] tracking-[0.2em] text-neutral-500">
+            <span className="h-px w-14 bg-cyan-400/50" />DATABASE PIPELINE<span className="h-px w-14 bg-cyan-400/50" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function Services() {
-  return <section id="services" className="border-b border-white/[0.06] py-28 sm:py-36"><div className="mx-auto max-w-7xl px-5 sm:px-8"><SectionHeading eyebrow="SERVICES" title="WHAT WE CAN BUILD FOR YOU" description="Focused engineering capabilities by AUTOMATE VISION for teams ready to make work more intelligent." /><div className="grid gap-px overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.08] sm:grid-cols-2 lg:grid-cols-6">{services.map((service) => <div key={service.title} className="bg-[#080808] p-6 transition-colors hover:bg-[#0c1011]"><h3 className="mt-6 min-h-[48px] text-sm font-semibold tracking-[0.12em] text-white">{service.title}</h3><ul className="mt-7 space-y-3">{service.items.map((item) => <li key={item} className="flex items-center gap-2 text-xs text-zinc-500"><Check className="h-3 w-3 text-accent" />{item}</li>)}</ul></div>)}</div></div></section>;
+  return (
+    <section id="services" className="border-b border-white/5 bg-black py-24 sm:py-36 text-white">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <SectionHeading eyebrow="SERVICES" title="Engineered Capabilities." description="Focused engineering capabilities by AUTOMATE VISION for enterprise teams ready to scale intelligent operations." />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <div key={service.title} className="rounded-2xl border border-white/10 bg-neutral-950 p-8 transition-colors hover:border-cyan-400/40">
+              <h3 className="text-xl font-medium tracking-tight text-white">{service.title}</h3>
+              <ul className="mt-6 space-y-3">
+                {service.items.map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-xs sm:text-sm text-neutral-400">
+                    <Check className="h-4 w-4 text-cyan-400 shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function Process() {
-  return <section id="process" className="border-b border-white/[0.06] py-28 sm:py-36"><div className="mx-auto max-w-7xl px-5 sm:px-8"><SectionHeading eyebrow="PROCESS" title="HOW WE BUILD" description="From an idea to a production-ready AI website or automation system." /><div className="grid gap-px overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.08] md:grid-cols-3 lg:grid-cols-6">{processSteps.map(([title, copy]) => <div key={title} className="group relative bg-[#080808] p-6 transition-colors hover:bg-[#0c1011]"><h3 className="mt-6 text-sm font-semibold tracking-[0.14em] text-white">{title}</h3><p className="mt-4 text-xs leading-5 text-zinc-500">{copy}</p><div className="absolute bottom-0 left-0 h-px w-0 bg-accent transition-all duration-500 group-hover:w-full" /></div>)}</div></div></section>;
+  return (
+    <section id="process" className="border-b border-white/5 bg-black py-24 sm:py-36 text-white">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <SectionHeading eyebrow="PROCESS" title="How We Build." description="From an initial idea to a production-ready AI ecosystem." />
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {processSteps.map(([num, title, copy]) => (
+            <div key={title} className="group relative rounded-2xl border border-white/10 bg-neutral-950 p-8 transition-colors hover:border-cyan-400/40">
+              <span className="font-mono text-3xl font-light text-cyan-400">{num}</span>
+              <h3 className="mt-6 text-lg font-medium text-white tracking-wide">{title}</h3>
+              <p className="mt-3 text-xs sm:text-sm text-neutral-400 leading-relaxed font-light">{copy}</p>
+              <div className="absolute bottom-0 left-0 h-px w-0 bg-cyan-400 transition-all duration-500 group-hover:w-full" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function Technology() {
-  return <section className="border-b border-white/[0.06] py-28 sm:py-36"><div className="mx-auto max-w-7xl px-5 sm:px-8"><SectionHeading eyebrow="TECHNOLOGY" title="THE RIGHT TOOLS FOR THE JOB" description="Technology is supporting evidence. The system and the outcome come first." /><div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">{techGroups.map(([name, ...tools]) => <div key={name} className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-6"><div className="font-mono text-[9px] tracking-[0.18em] text-accent">{name}</div><div className="mt-6 flex flex-wrap gap-x-5 gap-y-3">{tools.map((tool) => <span key={tool} className="text-sm text-zinc-300">{tool}</span>)}</div></div>)}</div></div></section>;
+  return (
+    <section className="border-b border-white/5 bg-black py-24 sm:py-36 text-white">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <SectionHeading eyebrow="TECHNOLOGY" title="The Right Tools for the Job." description="Technology is supporting evidence. The architecture and business outcome come first." />
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {techGroups.map(([name, ...tools]) => (
+            <div key={name} className="rounded-2xl border border-white/10 bg-neutral-950 p-8">
+              <div className="font-mono text-[10px] tracking-[0.24em] text-cyan-400 uppercase">{name}</div>
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
+                {tools.map((tool) => (
+                  <span key={tool} className="text-sm text-neutral-300 font-light">{tool}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function WhyUs() {
-  const points = [['BUSINESS FIRST', 'We don&apos;t build technology for the sake of technology. We build around actual business workflows.'], ['AI FIRST', 'We identify where AI can eliminate repetitive work and improve customer experiences.'], ['END-TO-END', 'From architecture and development to deployment and integration.'], ['BUILT TO SCALE', 'Systems are designed with maintainability, reliability and future growth in mind.']];
-  return <section className="border-b border-white/[0.06] bg-white py-28 text-black sm:py-36"><div className="mx-auto max-w-7xl px-5 sm:px-8"><SectionHeading eyebrow="WHY US" title="ENGINEERED FOR REAL BUSINESS PROBLEMS" description="Practical systems, clear thinking and technology that earns its place in the workflow." light /><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{points.map(([title, copy]) => <div key={title} className="border-t border-black/15 pt-5"><h3 className="mt-6 text-lg font-semibold tracking-[-0.02em]">{title}</h3><p className="mt-4 text-sm leading-6 text-zinc-600">{copy}</p></div>)}</div></div></section>;
+  const points = [
+    ['01 BUSINESS FIRST', 'We build around actual business workflows and clear operational outcomes.'],
+    ['02 AI FIRST', 'We identify where AI eliminates repetitive manual tasks and scales throughput.'],
+    ['03 END-TO-END', 'From strategy and systems engineering to deployment, hosting, and API integrations.'],
+    ['04 BUILT TO SCALE', 'Architectures designed for maintainability, high concurrency, and future expansion.'],
+  ];
+  return (
+    <section className="relative overflow-hidden bg-white py-24 text-black sm:py-36">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <p className="text-xs sm:text-sm font-mono tracking-[0.4em] uppercase text-neutral-400 mb-6">WHY US</p>
+        <h2 className="text-4xl font-medium tracking-tight sm:text-6xl text-black">Engineered for real business problems.</h2>
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 border-t border-black/15 pt-10">
+          {points.map(([title, copy]) => (
+            <div key={title} className="flex flex-col gap-3">
+              <span className="font-mono text-xs text-cyan-700 tracking-[0.2em] font-semibold">{title.split(' ')[0]}</span>
+              <h3 className="text-lg font-medium text-black">{title.substring(3)}</h3>
+              <p className="text-sm leading-relaxed text-neutral-600">{copy}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function About() {
   return (
-    <section id="about" className="border-b border-white/[0.06] py-28 sm:py-36">
+    <section id="about" className="border-b border-white/5 bg-black py-24 sm:py-36 text-white">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
-          eyebrow="ABOUT AUTOMATE VISION"
-          title="AI SYSTEMS THAT WORK FOR YOU"
-          description="AUTOMATE VISION is an AI Automation & Digital Solutions studio. We architect AI Agents, Voice AI Receptionists, AI Chatbots, Websites + AI, WhatsApp Automation, and Business Automation."
+          eyebrow="LEADERSHIP & VISION"
+          title="Engineered by DEV SOLANKI & HET VEKARIYA."
+          description="AUTOMATE VISION is an AI Automation & Digital Solutions studio architecting AI Agents, Voice AI Receptionists, Web Applications, and WhatsApp Automation."
         />
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Dev Solanki */}
-          <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-7 transition-colors hover:border-cyan-500/40">
+          <div className="rounded-2xl border border-white/10 bg-neutral-950 p-8 transition-colors hover:border-cyan-400/40">
             <div className="flex items-center gap-4">
               <div className="grid h-12 w-12 place-items-center rounded-xl border border-cyan-400/40 bg-cyan-400/10 font-mono text-sm font-bold text-cyan-400">
                 DS
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">DEV SOLANKI</h3>
+                <h3 className="text-xl font-medium text-white">DEV SOLANKI</h3>
                 <p className="font-mono text-xs text-cyan-400">FOUNDER & CEO</p>
               </div>
             </div>
-            <p className="mt-5 text-xs leading-6 text-zinc-400">
+            <p className="mt-5 text-xs sm:text-sm leading-relaxed text-neutral-400 font-light">
               Leading AI systems architecture, full-stack web engineering, machine learning pipelines, and autonomous agent design.
             </p>
-            <div className="mt-6 font-mono text-[10px] text-zinc-500">
-              TEL: <a href="tel:+919313220796" className="text-zinc-300 hover:text-cyan-400">+91 9313220796</a>
+            <div className="mt-6 font-mono text-xs text-neutral-400 flex items-center gap-2">
+              <Phone className="h-3.5 w-3.5 text-cyan-400" />
+              <a href="tel:+919313220796" className="hover:text-cyan-400">+91 9313220796</a>
             </div>
           </div>
 
           {/* Het Vekariya */}
-          <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-7 transition-colors hover:border-cyan-500/40">
+          <div className="rounded-2xl border border-white/10 bg-neutral-950 p-8 transition-colors hover:border-cyan-400/40">
             <div className="flex items-center gap-4">
               <div className="grid h-12 w-12 place-items-center rounded-xl border border-cyan-400/40 bg-cyan-400/10 font-mono text-sm font-bold text-cyan-400">
                 HV
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">HET VEKARIYA</h3>
+                <h3 className="text-xl font-medium text-white">HET VEKARIYA</h3>
                 <p className="font-mono text-xs text-cyan-400">FOUNDER & CEO</p>
               </div>
             </div>
-            <p className="mt-5 text-xs leading-6 text-zinc-400">
+            <p className="mt-5 text-xs sm:text-sm leading-relaxed text-neutral-400 font-light">
               Driving business automation strategies, client operations, digital solutions, and enterprise growth engineering.
             </p>
-            <div className="mt-6 font-mono text-[10px] text-zinc-500">
-              TEL: <a href="tel:+919712945544" className="text-zinc-300 hover:text-cyan-400">+91 9712945544</a>
+            <div className="mt-6 font-mono text-xs text-neutral-400 flex items-center gap-2">
+              <Phone className="h-3.5 w-3.5 text-cyan-400" />
+              <a href="tel:+919712945544" className="hover:text-cyan-400">+91 9712945544</a>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-3 rounded-xl border border-white/10 bg-white/[0.015] p-5 font-mono text-xs tracking-[0.2em] text-zinc-400">
+        <div className="mt-10 flex flex-wrap justify-center gap-4 rounded-2xl border border-white/10 bg-neutral-950 p-6 font-mono text-xs tracking-[0.24em] text-neutral-400">
           <span>AUTOMATE</span>
           <span className="text-cyan-400">•</span>
           <span>INNOVATE</span>
@@ -354,21 +665,21 @@ function About() {
 
 function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden py-32 sm:py-44">
-      <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/[0.07] blur-[120px]" />
-      <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
-        <div className="mb-6 font-mono text-[10px] tracking-[0.24em] text-cyan-400">AUTOMATE VISION // CONTACT</div>
-        <h2 className="text-5xl font-bold leading-[0.95] tracking-[-0.05em] text-white sm:text-7xl">
+    <section id="contact" className="relative overflow-hidden py-32 sm:py-44 bg-black text-white">
+      <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/[0.08] blur-[140px] pointer-events-none" />
+      <div className="relative mx-auto max-w-4xl px-6 text-center">
+        <div className="mb-6 font-mono text-[10px] tracking-[0.3em] text-cyan-400 uppercase">AUTOMATE VISION // CONTACT</div>
+        <h2 className="text-5xl sm:text-7xl font-medium tracking-tighter leading-[0.94] text-white">
           READY TO BUILD YOUR <br />
-          <span className="text-gradient-accent">INTELLIGENT SYSTEM?</span>
+          <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-cyan-400">INTELLIGENT SYSTEM?</span>
         </h2>
-        <p className="mx-auto mt-8 max-w-lg text-base leading-7 text-zinc-400">
+        <p className="mx-auto mt-8 max-w-lg text-sm sm:text-base leading-relaxed text-neutral-400 font-light">
           Get in touch with DEV SOLANKI & HET VEKARIYA to architect AI solutions tailored for your business.
         </p>
 
-        <div className="mt-9 flex flex-wrap justify-center gap-3">
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
           <ButtonLink href="/contact" onClick={() => track('contact_page_clicked')}>
-            CONTACT US PAGE
+            START PROJECT
           </ButtonLink>
           <ButtonLink href="https://wa.me/919313220796" outline onClick={() => track('whatsapp_clicked')}>
             WHATSAPP US
@@ -381,17 +692,50 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] py-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 sm:px-8 md:flex-row md:items-center md:justify-between">
-        <Logo />
-        <div className="flex gap-5 font-mono text-[9px] tracking-[0.16em] text-zinc-500">
-          <a href="#work" className="hover:text-white">WORK</a>
-          <a href="#services" className="hover:text-white">SERVICES</a>
-          <a href="#about" className="hover:text-white">ABOUT</a>
-          <a href="#contact" className="hover:text-white">CONTACT</a>
+    <footer className="relative bg-neutral-950 text-white w-full pt-16 pb-10 overflow-hidden border-t border-white/10">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <div className="lg:col-span-5 space-y-4">
+            <Logo />
+            <p className="text-neutral-400 max-w-sm leading-relaxed text-xs sm:text-sm font-light mt-4">
+              Engineering digital systems that scale and perform. <br />Built with clarity, reliability, and purpose.
+            </p>
+          </div>
+          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            <div className="space-y-4">
+              <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-neutral-500">Platform</h4>
+              <ul className="space-y-2.5 font-mono text-xs">
+                <li><a href="#work" className="text-neutral-400 hover:text-white transition-colors">Work</a></li>
+                <li><a href="#capabilities" className="text-neutral-400 hover:text-white transition-colors">Capabilities</a></li>
+                <li><a href="#services" className="text-neutral-400 hover:text-white transition-colors">Services</a></li>
+                <li><a href="#vision" className="text-neutral-400 hover:text-white transition-colors">Vision</a></li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-neutral-500">Company</h4>
+              <ul className="space-y-2.5 font-mono text-xs">
+                <li><a href="#about" className="text-neutral-400 hover:text-white transition-colors">About</a></li>
+                <li><a href="#process" className="text-neutral-400 hover:text-white transition-colors">Process</a></li>
+                <li><a href="/contact" className="text-neutral-400 hover:text-white transition-colors">Contact</a></li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-neutral-500">Direct Contact</h4>
+              <ul className="space-y-2 font-mono text-xs text-neutral-400">
+                <li>DEV SOLANKI: +91 9313220796</li>
+                <li>HET VEKARIYA: +91 9712945544</li>
+                <li><a href="mailto:automatevision06@gmail.com" className="text-cyan-400 hover:underline">automatevision06@gmail.com</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div className="font-mono text-[9px] tracking-[0.14em] text-zinc-500">
-          © 2026 AUTOMATE VISION. ALL RIGHTS RESERVED.
+
+        <div className="mt-14 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-mono tracking-widest text-neutral-500 uppercase">
+          <div>© 2026 AUTOMATE VISION. ALL RIGHTS RESERVED.</div>
+          <div className="flex items-center gap-6">
+            <span>PRIVACY POLICY</span>
+            <span>TERMS OF SERVICE</span>
+          </div>
         </div>
       </div>
     </footer>
@@ -400,5 +744,24 @@ function Footer() {
 
 export function StudioWebsite() {
   useEffect(() => { track('qr_landing'); }, []);
-  return <div className="noise-bg min-h-screen bg-[#050505]"><Navigation /><main><Hero /><Marquee /><TheVision /><Capabilities /><Work /><SystemMap /><Services /><Process /><Technology /><WhyUs /><About /><Contact /></main><Footer /></div>;
+  return (
+    <div className="noise-bg min-h-screen bg-black text-white">
+      <Navigation />
+      <main>
+        <Hero />
+        <Marquee />
+        <TheVision />
+        <Capabilities />
+        <Work />
+        <SystemMap />
+        <Services />
+        <Process />
+        <Technology />
+        <WhyUs />
+        <About />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
 }
