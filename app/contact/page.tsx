@@ -45,11 +45,18 @@ export default function ContactPage() {
     setLoading(true);
     setError('');
     try {
+      const body = new URLSearchParams({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        service: form.service,
+        message: form.message,
+      });
+
       await fetch(SHEET_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body,
       });
       track('contact_form_submitted', { service: form.service });
       setSubmitted(true);
