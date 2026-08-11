@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Check, ChevronDown, Globe2, Mail, Menu, MessageCircle, Network, Phone, Sparkles, X, Zap } from 'lucide-react';
+import { Activity, ArrowRight, ArrowUpRight, Bot, Calendar, Camera, Check, ChevronDown, Cpu, Database, FileText, Globe, Globe2, Layers, Mail, Menu, MessageCircle, Mic, Network, Phone, Scan, Search, Sparkles, Volume2, X, Zap } from 'lucide-react';
 import { StudioCanvas } from '@/components/studio-canvas';
 import { HeroAiCanvas } from '@/components/hero-ai-canvas';
 import { projects, type Project } from '@/lib/projects';
@@ -349,14 +349,208 @@ function Capabilities() {
 }
 
 function ProjectVisual({ project }: { project: Project }) {
-  return (
-    <div className="relative h-60 overflow-hidden border-b border-slate-200 bg-slate-900">
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/30 shadow-[0_0_60px_rgba(37,99,235,0.2)]">
-        <div className="absolute inset-6 rounded-full border border-dashed border-teal-400/40" />
-        <div className="absolute inset-0 m-auto h-4 w-4 rounded-full bg-blue-500 shadow-[0_0_24px_#2563eb]" />
+  if (project.id === 'ai-receptionist') {
+    return (
+      <div className="relative h-60 overflow-hidden border-b border-slate-200 bg-[#070d18] p-6 text-white flex flex-col justify-between">
+        <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+        <div className="flex items-center justify-between font-mono text-[9px] tracking-[0.2em] text-blue-400 z-10 uppercase">
+          <span className="flex items-center gap-1.5"><Mic className="h-3 w-3 text-cyan-400 animate-pulse" /> VOICE AI ENGINE</span>
+          <span className="rounded bg-blue-500/20 px-2 py-0.5 border border-blue-400/30 text-blue-300">24/7 ACTIVE</span>
+        </div>
+
+        <div className="relative my-auto flex items-center justify-center gap-6 sm:gap-8 z-10">
+          <div className="relative flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full border border-cyan-400/40 bg-cyan-950/40 shadow-[0_0_30px_rgba(6,182,212,0.3)]">
+            <Mic className="h-7 w-7 sm:h-8 sm:w-8 text-cyan-400 animate-pulse" />
+            <div className="absolute inset-0 rounded-full border border-dashed border-cyan-400/50 animate-spin-slow" />
+          </div>
+
+          <div className="flex items-center gap-1.5 h-12">
+            {[40, 75, 100, 60, 90, 45, 80, 100, 65, 30, 85, 50].map((h, i) => (
+              <motion.div
+                key={i}
+                animate={{ height: [`${h * 0.3}%`, `${h}%`, `${h * 0.4}%`] }}
+                transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.1, ease: 'easeInOut' }}
+                className="w-1.5 rounded-full bg-gradient-to-t from-blue-600 via-cyan-400 to-white"
+              />
+            ))}
+          </div>
+
+          <div className="hidden sm:flex flex-col items-center gap-1 rounded-xl border border-blue-400/30 bg-blue-950/50 p-3 font-mono text-[9px] text-blue-200">
+            <Calendar className="h-4 w-4 text-cyan-400" />
+            <span>CAL.COM SYNC</span>
+          </div>
+        </div>
+
+        <div className="font-mono text-[9px] tracking-[0.2em] text-slate-400 z-10 uppercase flex justify-between">
+          <span>SIGNAL // SPEECH-TO-INTENT</span>
+          <span>LATENCY // 140MS</span>
+        </div>
       </div>
-      <div className="absolute bottom-4 left-5 font-mono text-[9px] tracking-[0.2em] text-slate-400 uppercase">SYSTEM.VISUAL // {project.visual}</div>
+    );
+  }
+
+  if (project.id === 'tender-intelligence') {
+    return (
+      <div className="relative h-60 overflow-hidden border-b border-slate-200 bg-[#0b0c16] p-6 text-white flex flex-col justify-between">
+        <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+        <div className="flex items-center justify-between font-mono text-[9px] tracking-[0.2em] text-indigo-400 z-10 uppercase">
+          <span className="flex items-center gap-1.5"><FileText className="h-3 w-3 text-indigo-400" /> NLP CLASSIFIER</span>
+          <span className="rounded bg-indigo-500/20 px-2 py-0.5 border border-indigo-400/30 text-indigo-300">23K+ KEYWORDS</span>
+        </div>
+
+        <div className="relative my-auto flex items-center justify-center gap-4 sm:gap-6 z-10">
+          <div className="flex flex-col gap-1 rounded-xl border border-indigo-500/30 bg-indigo-950/60 p-3 font-mono text-[9px]">
+            <div className="text-slate-400">UNSTRUCTURED DOC</div>
+            <div className="text-white font-semibold">TENDER_#9842.PDF</div>
+          </div>
+          <div className="h-px w-6 sm:w-8 bg-gradient-to-r from-indigo-500 to-purple-500 relative">
+            <div className="absolute -top-1 left-1/2 h-2 w-2 rounded-full bg-purple-400 animate-ping" />
+          </div>
+          <div className="flex flex-col gap-1 font-mono text-[8px]">
+            <div className="rounded border border-indigo-400/40 bg-indigo-500/20 px-2 py-0.5 text-indigo-200">[INFRASTRUCTURE 99.4%]</div>
+            <div className="rounded border border-purple-400/40 bg-purple-500/20 px-2 py-0.5 text-purple-200">[GOVT COMPLIANCE]</div>
+            <div className="rounded border border-blue-400/40 bg-blue-500/20 px-2 py-0.5 text-blue-200">[EXCAVATION & CIVIL]</div>
+          </div>
+        </div>
+
+        <div className="font-mono text-[9px] tracking-[0.2em] text-slate-400 z-10 uppercase flex justify-between">
+          <span>MODEL // TF-IDF + XGBOOST</span>
+          <span>ACCURACY // 98.6%</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (project.id === 'handspeak') {
+    return (
+      <div className="relative h-60 overflow-hidden border-b border-slate-200 bg-[#061210] p-6 text-white flex flex-col justify-between">
+        <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+        <div className="flex items-center justify-between font-mono text-[9px] tracking-[0.2em] text-emerald-400 z-10 uppercase">
+          <span className="flex items-center gap-1.5"><Camera className="h-3 w-3 text-emerald-400 animate-pulse" /> COMPUTER VISION</span>
+          <span className="rounded bg-emerald-500/20 px-2 py-0.5 border border-emerald-400/30 text-emerald-300">REALTIME TRACKING</span>
+        </div>
+
+        <div className="relative my-auto flex items-center justify-center z-10">
+          <div className="relative h-28 w-44 rounded-xl border border-emerald-500/40 bg-emerald-950/30 p-2 overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+            <div className="absolute top-2 left-2 flex items-center gap-1 text-[8px] font-mono text-emerald-400">
+              <Scan className="h-3 w-3" /> FPS: 60
+            </div>
+            <div className="relative h-full w-full flex items-center justify-center">
+              <div className="relative h-16 w-24">
+                {[[10, 20], [30, 15], [50, 25], [70, 10], [85, 30], [50, 50], [30, 60], [60, 70]].map(([x, y], idx) => (
+                  <div
+                    key={idx}
+                    style={{ left: `${x}%`, top: `${y}%` }}
+                    className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]"
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="absolute bottom-2 right-2 rounded bg-emerald-400/20 px-1.5 py-0.5 font-mono text-[8px] font-bold text-emerald-300">
+              GESTURE: &quot;HELLO&quot;
+            </div>
+          </div>
+        </div>
+
+        <div className="font-mono text-[9px] tracking-[0.2em] text-slate-400 z-10 uppercase flex justify-between">
+          <span>PIPELINE // MEDIAPIPE + TENSORFLOW</span>
+          <span>LATENCY // &lt; 20MS</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (project.id === 'property-intelligence') {
+    return (
+      <div className="relative h-60 overflow-hidden border-b border-slate-200 bg-[#06101a] p-6 text-white flex flex-col justify-between">
+        <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+        <div className="flex items-center justify-between font-mono text-[9px] tracking-[0.2em] text-sky-400 z-10 uppercase">
+          <span className="flex items-center gap-1.5"><Database className="h-3 w-3 text-sky-400" /> RAG VECTOR ENGINE</span>
+          <span className="rounded bg-sky-500/20 px-2 py-0.5 border border-sky-400/30 text-sky-300">-60% TOKENS</span>
+        </div>
+
+        <div className="relative my-auto flex items-center justify-center gap-4 sm:gap-6 z-10">
+          <div className="flex flex-col items-center gap-1 rounded-xl border border-sky-500/30 bg-sky-950/50 p-2.5 font-mono text-[9px]">
+            <Search className="h-4 w-4 text-sky-400" />
+            <span>USER QUERY</span>
+          </div>
+          <div className="h-px w-8 bg-sky-400 animate-pulse" />
+          <div className="relative flex h-20 w-28 flex-col justify-between rounded-xl border border-cyan-500/40 bg-cyan-950/60 p-2.5 font-mono text-[8px]">
+            <div className="text-cyan-400 font-bold">VECTOR DB</div>
+            <div className="text-slate-300">EMBEDDINGS RETRIEVED</div>
+            <div className="rounded bg-sky-400/20 px-1 text-sky-200 text-[7px]">SUPABASE VECTOR</div>
+          </div>
+        </div>
+
+        <div className="font-mono text-[9px] tracking-[0.2em] text-slate-400 z-10 uppercase flex justify-between">
+          <span>VECTOR DB // SUPABASE VECTOR</span>
+          <span>CONTEXT SAVINGS // 60%</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (project.id === 'intelligent-data-extraction') {
+    return (
+      <div className="relative h-60 overflow-hidden border-b border-slate-200 bg-[#160d06] p-6 text-white flex flex-col justify-between">
+        <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+        <div className="flex items-center justify-between font-mono text-[9px] tracking-[0.2em] text-amber-400 z-10 uppercase">
+          <span className="flex items-center gap-1.5"><Globe className="h-3 w-3 text-amber-400 animate-spin-slow" /> DATA EXTRACTION</span>
+          <span className="rounded bg-amber-500/20 px-2 py-0.5 border border-amber-400/30 text-amber-300">AUTOMATED PIPELINE</span>
+        </div>
+
+        <div className="relative my-auto flex items-center justify-center gap-4 z-10">
+          <div className="rounded-xl border border-amber-500/30 bg-amber-950/50 p-3 font-mono text-[9px] space-y-1">
+            <div className="text-amber-400 flex items-center gap-1"><Globe className="h-3 w-3" /> PLAYWRIGHT</div>
+            <div className="text-slate-300 text-[8px]">DOM PARSER + PDF</div>
+          </div>
+          <div className="h-px w-6 bg-amber-400" />
+          <div className="rounded-xl border border-amber-400/40 bg-amber-900/40 p-3 font-mono text-[9px] text-amber-200">
+            <div>JSON MATRIX</div>
+            <div className="text-[7px] text-amber-300">{`{ "records": 14200 }`}</div>
+          </div>
+        </div>
+
+        <div className="font-mono text-[9px] tracking-[0.2em] text-slate-400 z-10 uppercase flex justify-between">
+          <span>STACK // PLAYWRIGHT + MONGODB</span>
+          <span>STATUS // PARSED & CLEAN</span>
+        </div>
+      </div>
+    );
+  }
+
+  // Tanush Fitness B2B
+  return (
+    <div className="relative h-60 overflow-hidden border-b border-slate-200 bg-[#071318] p-6 text-white flex flex-col justify-between">
+      <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+      <div className="flex items-center justify-between font-mono text-[9px] tracking-[0.2em] text-cyan-400 z-10 uppercase">
+        <span className="flex items-center gap-1.5"><Activity className="h-3 w-3 text-cyan-400" /> B2B SAAS PLATFORM</span>
+        <span className="rounded bg-cyan-500/20 px-2 py-0.5 border border-cyan-400/30 text-cyan-300">100% BOOKING SYNC</span>
+      </div>
+
+      <div className="relative my-auto flex items-center justify-center z-10">
+        <div className="w-64 rounded-xl border border-cyan-500/40 bg-cyan-950/60 p-3 font-mono text-[9px] space-y-2 shadow-[0_0_30px_rgba(6,182,212,0.2)]">
+          <div className="flex items-center justify-between text-cyan-300 font-bold border-b border-cyan-500/30 pb-1.5">
+            <span>TANUSH FITNESS B2B</span>
+            <span className="text-[8px] text-emerald-400">ONLINE</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2 text-[8px]">
+            <div className="rounded bg-cyan-900/40 p-1.5">
+              <div className="text-slate-400">QUALIFICATION</div>
+              <div className="text-cyan-300 font-bold">+45% FASTER</div>
+            </div>
+            <div className="rounded bg-cyan-900/40 p-1.5">
+              <div className="text-slate-400">BOOKING FLOW</div>
+              <div className="text-emerald-400 font-bold">AUTOMATED</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="font-mono text-[9px] tracking-[0.2em] text-slate-400 z-10 uppercase flex justify-between">
+        <span>FRAMEWORK // NEXT.JS + FASTAPI</span>
+        <span>CLIENT PORTAL // ACTIVE</span>
+      </div>
     </div>
   );
 }
