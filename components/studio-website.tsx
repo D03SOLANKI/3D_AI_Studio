@@ -46,12 +46,12 @@ const services = [
 ];
 
 const processSteps = [
-  ['01', 'DISCOVER', 'Understand the business problem and operational bottleneck.'],
-  ['02', 'DESIGN', 'Define system architecture, user experience, and AI pipelines.'],
-  ['03', 'BUILD', 'Engineer high-performance software and cloud integrations.'],
-  ['04', 'TEST', 'Validate accuracy, reliability, latency, and edge cases.'],
-  ['05', 'DEPLOY', 'Launch into production with continuous monitoring.'],
-  ['06', 'OPTIMIZE', 'Analyze performance telemetry and scale workflows.'],
+  ['DISCOVER', 'Understand the business problem.'],
+  ['DESIGN', 'Define architecture and user experience.'],
+  ['BUILD', 'Engineer the product and integrations.'],
+  ['TEST', 'Validate reliability and edge cases.'],
+  ['DEPLOY', 'Launch into production.'],
+  ['OPTIMIZE', 'Monitor, improve and scale.'],
 ];
 
 const techGroups = [
@@ -472,53 +472,23 @@ function Work() {
   );
 }
 
-function SystemMap() {
-  return (
-    <section className="relative overflow-hidden border-b border-white/5 bg-black py-24 sm:py-36 text-white">
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <SectionHeading eyebrow="SYSTEM MAP" title="Ecosystem Architecture." description="We connect disconnected tools, web portals, and WhatsApp channels into intelligent workflows that move information seamlessly." />
-        <div className="relative mx-auto max-w-4xl rounded-3xl border border-cyan-400/30 bg-[#060c0e] p-8 sm:p-14 shadow-2xl">
-          <div className="absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_center,rgba(0,217,255,0.09),transparent_60%)] pointer-events-none" />
-          <div className="relative grid grid-cols-3 items-center gap-6 sm:gap-12">
-            <div className="space-y-16 text-right font-mono text-[10px] tracking-[0.2em] text-neutral-400 sm:text-xs">
-              <div>AI WEBSITE</div>
-              <div>WHATSAPP</div>
-            </div>
-            <div className="relative flex flex-col items-center gap-7">
-              <div className="absolute left-1/2 top-1/2 h-[180%] w-px -translate-x-1/2 -translate-y-1/2 bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent" />
-              <div className="relative grid h-32 w-32 place-items-center rounded-full border border-cyan-400/50 bg-[#0a2328] text-center font-mono text-[11px] font-bold tracking-[0.2em] text-cyan-400 shadow-[0_0_60px_rgba(0,217,255,0.22)] sm:h-40 sm:w-40">
-                <span>AI<br />CORE</span>
-              </div>
-              <div className="relative flex h-16 w-44 items-center justify-center rounded-xl border border-cyan-400/30 bg-[#09171a] font-mono text-[9px] tracking-[0.16em] text-neutral-300">AUTOMATION ENGINE</div>
-            </div>
-            <div className="space-y-16 font-mono text-[10px] tracking-[0.2em] text-neutral-400 sm:text-xs">
-              <div>VOICE AI</div>
-              <div>DATA</div>
-            </div>
-          </div>
-          <div className="mt-14 flex items-center justify-center gap-4 border-t border-white/10 pt-8 font-mono text-[10px] tracking-[0.2em] text-neutral-500">
-            <span className="h-px w-14 bg-cyan-400/50" />DATABASE PIPELINE<span className="h-px w-14 bg-cyan-400/50" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Services() {
   return (
-    <section id="services" className="border-b border-white/5 bg-black py-24 sm:py-36 text-white">
+    <section id="services" className="border-b border-white/[0.06] py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <SectionHeading eyebrow="SERVICES" title="Engineered Capabilities." description="Focused engineering capabilities by AUTOMATE VISION for enterprise teams ready to scale intelligent operations." />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <SectionHeading
+          eyebrow="SERVICES"
+          title="WHAT WE CAN BUILD FOR YOU"
+          description="Focused engineering capabilities by AUTOMATE VISION for teams ready to make work more intelligent."
+        />
+        <div className="grid gap-px overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.08] sm:grid-cols-2 lg:grid-cols-6">
           {services.map((service) => (
-            <div key={service.title} className="rounded-2xl border border-white/10 bg-neutral-950 p-8 transition-colors hover:border-cyan-400/40">
-              <h3 className="text-xl font-medium tracking-tight text-white">{service.title}</h3>
-              <ul className="mt-6 space-y-3">
+            <div key={service.title} className="bg-[#080808] p-6 transition-colors hover:bg-[#0c1011]">
+              <h3 className="mt-6 min-h-[48px] text-sm font-semibold tracking-[0.12em] text-white">{service.title}</h3>
+              <ul className="mt-7 space-y-3">
                 {service.items.map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-xs sm:text-sm text-neutral-400">
-                    <Check className="h-4 w-4 text-cyan-400 shrink-0" />
+                  <li key={item} className="flex items-center gap-2 text-xs text-neutral-400">
+                    <Check className="h-3 w-3 text-cyan-400 shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -533,15 +503,18 @@ function Services() {
 
 function Process() {
   return (
-    <section id="process" className="border-b border-white/5 bg-black py-24 sm:py-36 text-white">
+    <section id="process" className="border-b border-white/[0.06] py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <SectionHeading eyebrow="PROCESS" title="How We Build." description="From an initial idea to a production-ready AI ecosystem." />
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {processSteps.map(([num, title, copy]) => (
-            <div key={title} className="group relative rounded-2xl border border-white/10 bg-neutral-950 p-8 transition-colors hover:border-cyan-400/40">
-              <span className="font-mono text-3xl font-light text-cyan-400">{num}</span>
-              <h3 className="mt-6 text-lg font-medium text-white tracking-wide">{title}</h3>
-              <p className="mt-3 text-xs sm:text-sm text-neutral-400 leading-relaxed font-light">{copy}</p>
+        <SectionHeading
+          eyebrow="PROCESS"
+          title="HOW WE BUILD"
+          description="From an idea to a production-ready AI website or automation system."
+        />
+        <div className="grid gap-px overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.08] md:grid-cols-3 lg:grid-cols-6">
+          {processSteps.map(([title, copy]) => (
+            <div key={title} className="group relative bg-[#080808] p-6 transition-colors hover:bg-[#0c1011]">
+              <h3 className="mt-6 text-sm font-semibold tracking-[0.14em] text-white">{title}</h3>
+              <p className="mt-4 text-xs leading-5 text-neutral-400">{copy}</p>
               <div className="absolute bottom-0 left-0 h-px w-0 bg-cyan-400 transition-all duration-500 group-hover:w-full" />
             </div>
           ))}
@@ -753,7 +726,6 @@ export function StudioWebsite() {
         <TheVision />
         <Capabilities />
         <Work />
-        <SystemMap />
         <Services />
         <Process />
         <Technology />
