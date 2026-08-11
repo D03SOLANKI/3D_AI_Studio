@@ -83,7 +83,7 @@ function ButtonLink({ href, children, outline = false, onClick }: { href: string
 function Navigation() {
   const [open, setOpen] = useState(false);
   const links = [['WORK', '#work'], ['SERVICES', '#services'], ['PROCESS', '#process'], ['ABOUT', '#about']];
-  return <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#050505]/80 backdrop-blur-xl"><div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8"><Logo /><nav className="hidden items-center gap-8 md:flex">{links.map(([label, href]) => <a key={href} href={href} className="font-mono text-[10px] tracking-[0.18em] text-zinc-500 transition-colors hover:text-white">{label}</a>)}</nav><div className="hidden md:block"><ButtonLink href="#contact" onClick={() => track('cta_click', { location: 'nav' })}>LET&apos;S BUILD</ButtonLink></div><button className="rounded-full border border-white/10 p-2.5 text-white md:hidden" onClick={() => setOpen(!open)} aria-label={open ? 'Close menu' : 'Open menu'}>{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button></div><AnimatePresence>{open && <motion.nav initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="border-t border-white/[0.06] bg-[#050505] px-5 py-5 md:hidden">{links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)} className="block border-b border-white/[0.06] py-4 font-mono text-xs tracking-[0.2em] text-zinc-300">{label}</a>)}<a href="#contact" onClick={() => setOpen(false)} className="mt-5 block rounded-full bg-white px-5 py-3 text-center font-mono text-[10px] font-semibold tracking-[0.18em] text-black">LET&apos;S BUILD <ArrowRight className="ml-2 inline h-3.5 w-3.5" /></a></motion.nav>}</AnimatePresence></header>;
+  return <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#050505]/80 backdrop-blur-xl"><div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8"><Logo /><nav className="hidden items-center gap-8 md:flex">{links.map(([label, href]) => <a key={href} href={href} className="font-mono text-[10px] tracking-[0.18em] text-zinc-500 transition-colors hover:text-white">{label}</a>)}</nav><div className="hidden md:block"><ButtonLink href="mailto:automatevision06@gmail.com" onClick={() => track('cta_click', { location: 'nav' })}>LET&apos;S BUILD</ButtonLink></div><button className="rounded-full border border-white/10 p-2.5 text-white md:hidden" onClick={() => setOpen(!open)} aria-label={open ? 'Close menu' : 'Open menu'}>{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button></div><AnimatePresence>{open && <motion.nav initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="border-t border-white/[0.06] bg-[#050505] px-5 py-5 md:hidden">{links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)} className="block border-b border-white/[0.06] py-4 font-mono text-xs tracking-[0.2em] text-zinc-300">{label}</a>)}<a href="mailto:automatevision06@gmail.com" onClick={() => setOpen(false)} className="mt-5 block rounded-full bg-white px-5 py-3 text-center font-mono text-[10px] font-semibold tracking-[0.18em] text-black">LET&apos;S BUILD <ArrowRight className="ml-2 inline h-3.5 w-3.5" /></a></motion.nav>}</AnimatePresence></header>;
 }
 
 function Hero() {
@@ -115,7 +115,7 @@ function Hero() {
             <ButtonLink href="#work" onClick={() => track('cta_click', { location: 'hero_work' })}>
               EXPLORE OUR WORK
             </ButtonLink>
-            <ButtonLink href="#contact" outline onClick={() => track('cta_click', { location: 'hero_contact' })}>
+            <ButtonLink href="mailto:automatevision06@gmail.com" outline onClick={() => track('cta_click', { location: 'hero_contact' })}>
               LET&apos;S BUILD
             </ButtonLink>
           </div>
@@ -240,52 +240,6 @@ function About() {
   );
 }
 
-function Contact() {
-  return (
-    <section id="contact" className="relative overflow-hidden py-32 sm:py-44">
-      <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/[0.07] blur-[120px]" />
-      <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
-        <div className="mb-6 font-mono text-[10px] tracking-[0.24em] text-cyan-400">AUTOMATE VISION // CONTACT</div>
-        <h2 className="text-5xl font-bold leading-[0.95] tracking-[-0.05em] text-white sm:text-7xl">
-          READY TO BUILD YOUR <br />
-          <span className="text-gradient-accent">INTELLIGENT SYSTEM?</span>
-        </h2>
-        <p className="mx-auto mt-8 max-w-lg text-base leading-7 text-zinc-400">
-          Get in touch with DEV SOLANKI & HET VEKARIYA to architect AI solutions tailored for your business.
-        </p>
-
-        <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <ButtonLink href="mailto:automatevision06@gmail.com" onClick={() => track('email_clicked')}>
-            START A PROJECT
-          </ButtonLink>
-          <ButtonLink href="https://wa.me/919313220796" outline onClick={() => track('whatsapp_clicked')}>
-            WHATSAPP US
-          </ButtonLink>
-        </div>
-
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 font-mono text-[10px] text-zinc-400 text-left rounded-2xl border border-white/10 bg-white/[0.02] p-6">
-          <div>
-            <div className="text-cyan-400 mb-1">EMAIL</div>
-            <a href="mailto:automatevision06@gmail.com" className="hover:text-white truncate block">AUTOMATEVISION06@GMAIL.COM</a>
-          </div>
-          <div>
-            <div className="text-cyan-400 mb-1">DEV SOLANKI (FOUNDER & CEO)</div>
-            <a href="tel:+919313220796" className="hover:text-white block">+91 9313220796</a>
-          </div>
-          <div>
-            <div className="text-cyan-400 mb-1">HET VEKARIYA (FOUNDER & CEO)</div>
-            <a href="tel:+919712945544" className="hover:text-white block">+91 9712945544</a>
-          </div>
-          <div>
-            <div className="text-cyan-400 mb-1">LOCATION</div>
-            <span className="text-white block">INDIA</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Footer() {
   return (
     <footer className="border-t border-white/[0.06] py-8">
@@ -295,7 +249,6 @@ function Footer() {
           <a href="#work" className="hover:text-white">WORK</a>
           <a href="#services" className="hover:text-white">SERVICES</a>
           <a href="#about" className="hover:text-white">ABOUT</a>
-          <a href="#contact" className="hover:text-white">CONTACT</a>
         </div>
         <div className="font-mono text-[9px] tracking-[0.14em] text-zinc-500">
           © 2026 AUTOMATE VISION. ALL RIGHTS RESERVED.
@@ -307,5 +260,5 @@ function Footer() {
 
 export function StudioWebsite() {
   useEffect(() => { track('qr_landing'); }, []);
-  return <div className="noise-bg min-h-screen bg-[#050505]"><Navigation /><main><Hero /><Capabilities /><Work /><SystemMap /><Services /><Process /><Technology /><WhyUs /><About /><Contact /></main><Footer /></div>;
+  return <div className="noise-bg min-h-screen bg-[#050505]"><Navigation /><main><Hero /><Capabilities /><Work /><SystemMap /><Services /><Process /><Technology /><WhyUs /><About /></main><Footer /></div>;
 }
