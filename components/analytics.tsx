@@ -7,6 +7,8 @@ type EventName =
   | 'case_study_opened'
   | 'demo_launched'
   | 'contact_clicked'
+  | 'contact_page_clicked'
+  | 'contact_form_submitted'
   | 'whatsapp_clicked'
   | 'email_clicked'
   | 'github_clicked'
